@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        emacs_version:
+          - '29.1'   # minimum supported (Package-Requires floor)
+          - '29.4'   # latest stable 29.x
+        include:
+          - emacs_version: snapshot
+            experimental: true
+
+    continue-on-error: ${{ matrix.experimental == true }}
+
+    name: Emacs ${{ matrix.emacs_version }}
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Install Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: ${{ matrix.emacs_version }}
+
+      - name: Emacs version
+        run: emacs --version
+
+      - name: Byte-compile (warnings are errors)
+        run: make compile
+
+      - name: Load theme without error
+        run: |
+          emacs -Q --batch -L . \
+            --eval "(add-to-list 'custom-theme-load-path default-directory)" \
+            --eval "(load-theme 'kanagawa-dragon-nvim t)" \
+            --eval "(message \"theme loaded OK\")"
+
+      - name: ERT test suite
+        run: make test
