@@ -53,7 +53,14 @@ Tick boxes when shipped. Each phase is independently usable.
       `bufferline.nvim` look.
 - [x] LSP semantic-tokens face overrides scoped narrowly so they
       don't fight font-lock.
-- [ ] `tests/test-faces.el` coverage extension to ≥80 faces.
+- [x] `tests/test-faces.el` coverage extension to ≥80 faces *(shipped v0.1.3,
+  2026-08-08: 182 unique faces asserted across 24 tests, sweeping the
+  previously-untested families — the full font-lock and tree-sitter-hl
+  namespaces, the whole lsp-semhl token family, org beyond level 4, the
+  doom-modeline set, diff/vcs winter-and-autumn split, magit, the completion
+  stack, the full rainbow-delimiters ladder, dired, bright ANSI/term/vterm,
+  the core-UI remainder, and the flycheck/flymake fringes; every expectation
+  read off the theme's binding table so drift fails by name)*.
 - [ ] CI (GitHub Actions) running `make test` on Emacs 29 + 30.
 
 ## v0.3 — sibling variants

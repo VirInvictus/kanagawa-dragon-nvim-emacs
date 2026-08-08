@@ -1,5 +1,21 @@
 # patchnotes.md
 
+## v0.1.3 — 2026-08-08
+
+Tests only; no face or palette change. The v0.2 coverage-extension item
+lands: `tests/test-faces.el` grows from 33 to 182 unique asserted faces
+(24 tests, up from 11), sweeping every previously-untested family the theme
+defines: the full `font-lock-*` and `tree-sitter-hl-face:*` namespaces, the
+whole `lsp-face-semhl-*` token family, org beyond level 4, doom-modeline,
+the diff/vcs winter-background and autumn-foreground split, magit, the
+completion stack (vertico/corfu/orderless/marginalia/which-key/company),
+the full nine-depth rainbow-delimiters ladder, dired, the bright ANSI row
+with its term/vterm mirrors, the core-UI remainder, and the
+flycheck/flymake fringes. Every expectation is read off the theme's
+binding table, so a drifted binding or a typo'd face entry fails by name
+rather than silently shipping. `make test` 29/29 on Emacs 30.2;
+`make compile` clean under warnings-as-errors.
+
 ## v0.1.2 — 2026-05-14
 
 Adds an opt-in helper that fixes a long-standing lsp-mode quirk where
