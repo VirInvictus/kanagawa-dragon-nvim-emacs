@@ -47,8 +47,16 @@ Tick boxes when shipped. Each phase is independently usable.
 
 ## v0.2 — sharpen
 
-- [ ] Light/dark detection: load Wave or Dragon based on
-      `frame-background-mode`.
+- [~] Light/dark detection: load Wave or Dragon based on
+      `frame-background-mode`. **Moved to v0.3** (2026-08-09). It cannot be built
+      where it stands: it loads the Wave variant, and Wave is a v0.3 deliverable
+      that does not exist in the tree at all. The alternative was pulling Wave
+      forward, but that is a second full port rather than a small add: `spec.md`
+      carries only the ~23 Wave hexes Dragon itself borrows, with no Wave
+      background ladder and no Wave face table, so it is comparable in size to the
+      original Dragon port. Detection is a two-line function once a second variant
+      exists and is worth nothing before then, so it follows Wave rather than
+      leading it.
 - [ ] Tabs: `centaur-tabs` and Emacs 28 `tab-bar` parity with nvim's
       `bufferline.nvim` look.
 - [x] LSP semantic-tokens face overrides scoped narrowly so they
@@ -66,7 +74,10 @@ Tick boxes when shipped. Each phase is independently usable.
 ## v0.3 — sibling variants
 
 - [ ] Wave variant (`kanagawa-wave-nvim-theme.el`) sharing the palette
-      helper.
+      helper. **Blocks the light/dark detection moved down from v0.2**, so it is
+      the first item of this milestone rather than one of three equals.
+- [ ] Light/dark detection: load Wave or Dragon from `frame-background-mode`
+      (moved from v0.2; needs the Wave variant above).
 - [ ] Lotus variant (light) — full second pass on every face that
       hardcoded a Dragon-specific bg.
 

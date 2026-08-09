@@ -1,5 +1,22 @@
 # patchnotes.md
 
+## v0.1.4 — 2026-08-09
+
+Roadmap correction, no theme change.
+
+**v0.2's light/dark detection could not be built as written.** It loads the Wave
+variant from `frame-background-mode`, and Wave is a v0.3 deliverable that does not
+exist anywhere in the tree. The item has moved to v0.3 and now sits directly after
+the Wave variant that it depends on.
+
+Pulling Wave forward into v0.2 was the other option and was rejected: `spec.md`
+carries only the roughly 23 Wave hexes that Dragon itself borrows, with no Wave
+background ladder and no Wave face table, so building it is comparable in size to
+the original Dragon port rather than a small addition. Detection is a two-line
+function once a second variant exists, and is worth exactly nothing before then,
+so it should follow Wave rather than lead it.
+
+
 ## v0.1.3 — 2026-08-08
 
 Tests only; no face or palette change. The v0.2 coverage-extension item
