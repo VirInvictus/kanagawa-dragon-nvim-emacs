@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A faithful Emacs port of the **Dragon** variant of `kanagawa.nvim` (rebelot). Vanilla `deftheme`, no `doom-themes` macro dependency. Emacs 29.1+ only. MIT-licensed. Currently v0.1.2, Dragon-only (no Wave/Lotus yet), not yet published to MELPA.
+A faithful Emacs port of the **Dragon** variant of `kanagawa.nvim` (rebelot). Vanilla `deftheme`, no `doom-themes` macro dependency. Emacs 29.1+ only. MIT-licensed. Currently v0.1.4, Dragon-only (Wave/Lotus deferred), not yet published to MELPA.
 
 The motivating problem: the existing `kanagawa-themes` Emacs package has the palette right but does not map the **Emacs 29+ tree-sitter `font-lock-*` faces** (`font-lock-function-call-face`, `font-lock-operator-face`, `font-lock-property-use-face`, bracket/delimiter/punctuation, etc.). At `treesit-font-lock-level 4` modern code modes collapse to default foreground. This theme maps every face in the spec so a Java buffer in Doom Emacs looks the way it does in nvim.
 
