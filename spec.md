@@ -125,8 +125,8 @@ Includes the Emacs 29+ tree-sitter additions (`*-call-face`,
 | `font-lock-doc-face`                | `dragonAsh` italic | `syn.comment`    |
 | `font-lock-doc-markup-face`         | `dragonGray3`      | derived          |
 | `font-lock-string-face`             | `dragonGreen2`     | `syn.string`     |
-| `font-lock-keyword-face`            | `dragonViolet`     | `syn.keyword`    |
-| `font-lock-builtin-face`            | `dragonViolet`     | `syn.statement`  |
+| `font-lock-keyword-face`            | `dragonViolet`     | `syn.keyword`, italic |
+| `font-lock-builtin-face`            | `dragonViolet`     | `syn.statement`, italic |
 | `font-lock-constant-face`           | `dragonOrange`     | `syn.constant`   |
 | `font-lock-number-face`             | `dragonPink`       | `syn.number`     |
 | `font-lock-type-face`               | `dragonAqua`       | `syn.type`       |

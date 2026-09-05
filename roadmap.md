@@ -57,8 +57,10 @@ Tick boxes when shipped. Each phase is independently usable.
       original Dragon port. Detection is a two-line function once a second variant
       exists and is worth nothing before then, so it follows Wave rather than
       leading it.
-- [ ] Tabs: `centaur-tabs` and Emacs 28 `tab-bar` parity with nvim's
-      `bufferline.nvim` look.
+- [ ] Tabs: a look-parity pass. The `centaur-tabs` and Emacs 28 `tab-bar`
+      faces are already mapped (v0.1.0's Phase 5); what remains is judging
+      the result against nvim's `bufferline.nvim` look, which is subjective
+      and needs eyes on both.
 - [x] LSP semantic-tokens face overrides scoped narrowly so they
       don't fight font-lock.
 - [x] `tests/test-faces.el` coverage extension to ≥80 faces *(shipped v0.1.3,
@@ -69,7 +71,12 @@ Tick boxes when shipped. Each phase is independently usable.
   stack, the full rainbow-delimiters ladder, dired, bright ANSI/term/vterm,
   the core-UI remainder, and the flycheck/flymake fringes; every expectation
   read off the theme's binding table so drift fails by name)*.
-- [ ] CI (GitHub Actions) running `make test` on Emacs 29 + 30.
+- [x] CI (GitHub Actions) running `make compile` + theme load + `make test`
+      *(shipped silently in the initial commit and green since; ticked
+      2026-09-05 when the audit found it. The matrix is Emacs 29.1, 29.4, and
+      snapshot — no Emacs 30 job, so the original "29 + 30" wording was
+      never true. Worth a patchnotes mention; noted here until the next
+      entry.)*
 
 ## v0.3 — sibling variants
 

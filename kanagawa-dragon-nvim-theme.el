@@ -5,7 +5,7 @@
 ;; Version: 0.1.4
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme
-;; URL: https://github.com/bdkl/kanagawa-dragon-nvim-emacs
+;; URL: https://github.com/VirInvictus/kanagawa-dragon-nvim-emacs
 ;; SPDX-License-Identifier: MIT
 
 ;;; Commentary:

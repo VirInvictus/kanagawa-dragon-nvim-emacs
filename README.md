@@ -59,7 +59,7 @@ Or via straight:
  '(kanagawa-dragon-nvim
    :type git
    :host github
-   :repo "bdkl/kanagawa-dragon-nvim-emacs"
+   :repo "VirInvictus/kanagawa-dragon-nvim-emacs"
    :files ("*.el")))
 (load-theme 'kanagawa-dragon-nvim t)
 ```
