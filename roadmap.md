@@ -128,3 +128,6 @@ Tick boxes when shipped. Each phase is independently usable.
       at 365e56c by the verbatim procedure and pushed with its GitHub
       Release; LICENSE/credit classification recorded as accepted
       hygiene, not fixed.)*
+- [ ] **Hygiene (recorded 2026-09-13, not fixed):** CI's
+      `purcell/setup-emacs@master` is an unpinned floating ref; pin it
+      to a version tag or SHA the next time the workflow is touched.
