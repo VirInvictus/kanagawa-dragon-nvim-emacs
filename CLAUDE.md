@@ -4,7 +4,7 @@ This file provides guidance for working on this repository.
 
 ## What this is
 
-A faithful Emacs port of the **Dragon** variant of `kanagawa.nvim` (rebelot). Vanilla `deftheme`, no `doom-themes` macro dependency. Emacs 29.1+ only. MIT-licensed. Currently v0.1.4, Dragon-only (Wave/Lotus deferred), not yet published to MELPA.
+Faithful Emacs ports of the **Dragon** and **Wave** variants of `kanagawa.nvim` (rebelot). Vanilla `deftheme`, no `doom-themes` macro dependency. Emacs 29.1+ only. MIT-licensed. Currently v0.2.0: Dragon and Wave shipped, Lotus deferred to v0.3; not yet published to MELPA.
 
 The motivating problem: the existing `kanagawa-themes` Emacs package has the palette right but does not map the **Emacs 29+ tree-sitter `font-lock-*` faces** (`font-lock-function-call-face`, `font-lock-operator-face`, `font-lock-property-use-face`, bracket/delimiter/punctuation, etc.). At `treesit-font-lock-level 4` modern code modes collapse to default foreground. This theme maps every face in the spec so a Java buffer in Doom Emacs looks the way it does in nvim.
 
@@ -36,7 +36,7 @@ Three source files, one role each. Keep them separate; don't fold the palette in
 
 - Exports `kanagawa-dragon-nvim-palette` (an alist of `(symbol . "#hex")` covering Dragon, Wave, and the shared pool) and `kanagawa-dragon-nvim-color` (lookup fn that errors on unknown names).
 - Loading this file does NOT enable either theme. It is `(require)`d by both theme files and is also intended for other consumers (statuslines, sibling ports) that want the exact hex values without reimplementing them.
-- Holds `kanagawa-dragon-nvim-version`, which a test asserts equals the trimmed contents of `VERSION`. Bumping a release means updating **both** in the same commit; the same string also appears in the file headers of both `.el` files. Four places, one number.
+- Holds `kanagawa-dragon-nvim-version`, which a test asserts equals the trimmed contents of `VERSION`. Bumping a release means updating **both** in the same commit; the same string also appears in the file headers of all three `.el` files. Five places, one number.
 - Hosts the opt-in `kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed` helper (see "LSP modifier bleed" below).
 
 ### `kanagawa-dragon-nvim-theme.el` — the Dragon deftheme, every face mapping

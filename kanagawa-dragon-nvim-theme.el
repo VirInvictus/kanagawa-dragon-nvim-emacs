@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2026 Brandon Larocque
 ;; Author: Brandon Larocque
-;; Version: 0.1.4
+;; Version: 0.2.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme
 ;; URL: https://github.com/VirInvictus/kanagawa-dragon-nvim-emacs

@@ -1,5 +1,49 @@
 # patchnotes.md
 
+## v0.2.0 (2026-09-13)
+
+The Wave variant ships: a second full port of upstream kanagawa.nvim's
+wave theme, sharing the palette helper with Dragon. New theme file
+`kanagawa-wave-nvim-theme.el`; enable with `(load-theme 'kanagawa-wave-nvim t)`.
+
+- Spec first, per the roadmap's sequencing: `spec.md` gained the
+  Wave-specific palette table (the sumi background ladder plus eight
+  wave accents) and a Wave role mapping that resolves every Dragon face
+  binding to its Wave value, so the contract covered the port before
+  the code did.
+- 14 new palette entries (`sumiInk0` through `sumiInk5`, `oniViolet`,
+  `oniViolet2`, `crystalBlue`, `springViolet2`, `sakuraPink`,
+  `surimiOrange`, `peachRed`, `boatYellow2`), hex and casing verbatim
+  from upstream `colors.lua` and pinned byte-for-byte by the palette
+  suite. The rest of Wave's pool was already in the palette from
+  Dragon's borrowings.
+- `kanagawa-wave-nvim-theme.el` maps the identical 483-face set as
+  Dragon, including every Emacs 29+ treesit face and the Doom UI
+  surfaces, with the Wave roles: strings `springGreen`, keywords
+  `oniViolet`, types `waveAqua2`, function calls `crystalBlue`,
+  parameters `oniViolet2`, punctuation `springViolet2`. Wave's
+  ANSI/term row mirrors upstream `term[1..18]`; upstream's alacritty
+  extra picks `#090618` for normal black and the theme follows
+  `themes.lua` instead (recorded in the spec).
+- Tests grow from 29 to 42: a Wave palette cross-check, Wave
+  spot-checks mirroring the load-bearing Dragon set, and two
+  structural invariants over both themes (every hex in every face spec
+  is a palette member; no face is specified twice per theme).
+- Fixed the spec drift the 2026-09-12 six-lens audit found: the Dragon
+  face table's `line-number` row said `dragonBlack6` while the theme
+  and test pin `dragonBlack5`; the spec row now matches (the document
+  was what was wrong).
+- README repairs, completing the partial 2026-09-05 URL fix: the Doom
+  install recipe is now a proper github recipe instead of a literal
+  local path, the vanilla snippet no longer hardcodes a home directory,
+  the "What's NOT in v0.1" section is retitled and current, and the
+  Layout section lists the Makefile, VERSION, CI workflow, and the
+  guidance file.
+- CI truth, owed a mention since the 2026-09-05 tick: the Actions
+  matrix is Emacs 29.1, 29.4, and snapshot (snapshot allowed to fail).
+  There has never been an Emacs 30 job, so earlier "29 + 30" wording
+  was never accurate. CI now loads both themes.
+
 ## v0.1.4 — 2026-08-09
 
 Roadmap correction, no theme change.

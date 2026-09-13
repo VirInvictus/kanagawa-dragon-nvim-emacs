@@ -75,14 +75,20 @@ Tick boxes when shipped. Each phase is independently usable.
       *(shipped silently in the initial commit and green since; ticked
       2026-09-05 when the audit found it. The matrix is Emacs 29.1, 29.4, and
       snapshot — no Emacs 30 job, so the original "29 + 30" wording was
-      never true. Worth a patchnotes mention; noted here until the next
-      entry.)*
+      never true. The owed patchnotes mention landed in the v0.2.0
+      entry; CI now loads both themes.)*
 
 ## v0.3 — sibling variants
 
-- [ ] Wave variant (`kanagawa-wave-nvim-theme.el`) sharing the palette
+- [x] Wave variant (`kanagawa-wave-nvim-theme.el`) sharing the palette
       helper. **Blocks the light/dark detection moved down from v0.2**, so it is
       the first item of this milestone rather than one of three equals.
+      *(shipped v0.2.0, 2026-09-13: spec tables first, then 14 palette
+      entries cross-checked byte-for-byte against upstream colors.lua,
+      then the theme file with the identical 483-face set, then the
+      tests; suite 29 to 42 and CI loads both themes. Milestone
+      headings here don't track release versions, so this is the
+      v0.2.0 release.)*
 - [ ] Light/dark detection: load Wave or Dragon from `frame-background-mode`
       (moved from v0.2; needs the Wave variant above).
 - [ ] Lotus variant (light) — full second pass on every face that
@@ -96,21 +102,29 @@ Tick boxes when shipped. Each phase is independently usable.
 
 ## New findings 2026-09-12 (six-lens full audit; detail: audit/FULL-AUDIT-2026-09-12.md, Wave 22)
 
-- [ ] **line-number colour drift:** spec's face table says dragonBlack6;
+- [x] **line-number colour drift:** spec's face table says dragonBlack6;
       the theme binds bg-p2 = dragonBlack5 and the test pins dragonBlack5
       - code+test agree against the spec, violating the "spec is
       authoritative" rule. One edit: correct the spec row to Black5 (or
-      move the theme).
-- [ ] **The 09-05 URL fix was partial:** the Doom recipe still uses
+      move the theme). *(fixed 2026-09-13: the spec row now says
+      dragonBlack5; code and test were already there.)*
+- [x] **The 09-05 URL fix was partial:** the Doom recipe still uses
       :local-repo with Brandon's literal home path and the vanilla example
       hardcodes it. Give Doom a proper github recipe; genericize the
-      snippet.
-- [ ] **Stale prose:** "What's NOT in v0.1" heading at v0.1.4 + the Wave
+      snippet. *(fixed 2026-09-13: Doom gets :host github/:repo, the
+      vanilla snippet takes a generic path.)*
+- [x] **Stale prose:** "What's NOT in v0.1" heading at v0.1.4 + the Wave
       deferral wording predates the v0.1.4 roadmap correction; the CI
       tick's owed patchnotes mention is still queued; Layout omits
-      Makefile/VERSION/CI/AGENTS.md.
-- [ ] **On the queued v0.1.4 tag lane:** pair the tag with a GitHub
+      Makefile/VERSION/CI/AGENTS.md. *(fixed 2026-09-13: retitled to
+      "What's NOT in v0.2" and rewritten against the shipped roadmap,
+      Layout completed, and the CI-truth mention landed in the v0.2.0
+      patchnotes entry.)*
+- [x] **On the queued v0.1.4 tag lane:** pair the tag with a GitHub
       Release (populates latestRelease); the repo is PRIVATE so the
       drafted description/topics wait for a public flip; note the LICENSE
       appendix makes GitHub classify "Other" (accept or move the credit
-      to the README only).
+      to the README only). *(executed 2026-09-13: v0.1.4 annotated tag cut
+      at 365e56c by the verbatim procedure and pushed with its GitHub
+      Release; LICENSE/credit classification recorded as accepted
+      hygiene, not fixed.)*
