@@ -102,7 +102,7 @@ Each face cites the nvim semantic role from `themes.lua`'s `dragon` block
 | `secondary-selection`      | bg `waveBlue2`         | `ui.bg_search`   |
 | `hl-line`                  | bg `dragonBlack4`      | `ui.bg_gutter`   |
 | `fringe`                   | bg `dragonBlack3`, fg `dragonBlack6` | derived |
-| `line-number`              | fg `dragonBlack6`      | derived          |
+| `line-number`              | fg `dragonBlack5`      | derived          |
 | `line-number-current-line` | fg `dragonWhite` bold  | derived          |
 | `vertical-border`          | fg `dragonBlack4`      | derived          |
 | `window-divider`           | fg `dragonBlack4`      | derived          |
