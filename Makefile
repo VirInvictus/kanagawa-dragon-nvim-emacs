@@ -14,7 +14,7 @@ compile:
 		-L . \
 		--eval '(setq byte-compile-error-on-warn t)' \
 		-f batch-byte-compile \
-		kanagawa-dragon-nvim.el kanagawa-dragon-nvim-theme.el
+		kanagawa-dragon-nvim.el kanagawa-dragon-nvim-theme.el kanagawa-wave-nvim-theme.el
 
 clean:
 	rm -f *.elc tests/*.elc

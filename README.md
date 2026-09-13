@@ -1,9 +1,9 @@
 # kanagawa-dragon-nvim-emacs
 
-A faithful Emacs port of the **Dragon** variant of [`kanagawa.nvim`][upstream]
-by [rebelot][upstream]. Built so that a Java buffer in Doom Emacs and the
-same buffer in nvim look like the same theme — not "two themes that happen
-to share a name."
+Faithful Emacs ports of the **Dragon** and **Wave** variants of
+[`kanagawa.nvim`][upstream] by [rebelot][upstream]. Built so that a Java
+buffer in Doom Emacs and the same buffer in nvim look like the same
+theme, not "two themes that happen to share a name."
 
 > Independent project. Not affiliated with `kanagawa.nvim`. Distributed
 > under MIT, matching upstream.
@@ -21,7 +21,9 @@ and parameters all collapse to the default foreground — losing nearly
 all of Dragon's semantic distinction.
 
 This theme maps every face the spec lists, including the new treesit
-buckets, so modern code modes look the way they do in nvim.
+buckets, so modern code modes look the way they do in nvim. Both variants
+install together: `kanagawa-dragon-nvim` (Dragon) and `kanagawa-wave-nvim`
+(Wave).
 
 ## Install
 
@@ -38,7 +40,7 @@ In `~/.config/doom/packages.el`:
 In `~/.config/doom/config.el`:
 
 ```elisp
-(setq doom-theme 'kanagawa-dragon-nvim)
+(setq doom-theme 'kanagawa-dragon-nvim)  ; or 'kanagawa-wave-nvim
 ```
 
 Then run `doom sync && doom run`.
@@ -49,7 +51,9 @@ Clone the repo wherever you like, then point `custom-theme-load-path` at it:
 
 ```elisp
 (add-to-list 'custom-theme-load-path "/path/to/kanagawa-dragon-nvim-emacs/")
-(load-theme 'kanagawa-dragon-nvim t)
+(load-theme 'kanagawa-dragon-nvim t)  ; Dragon (dark)
+;; or:
+(load-theme 'kanagawa-wave-nvim t)    ; Wave (dark)
 ```
 
 Or via straight:
@@ -61,7 +65,7 @@ Or via straight:
    :host github
    :repo "VirInvictus/kanagawa-dragon-nvim-emacs"
    :files ("*.el")))
-(load-theme 'kanagawa-dragon-nvim t)
+(load-theme 'kanagawa-dragon-nvim t)  ; or kanagawa-wave-nvim
 ```
 
 ## Requirements
@@ -102,9 +106,10 @@ lives in `kanagawa-dragon-nvim-lsp-bleeding-modifiers`.
 
 The reference comparison is `tests/sample.java` opened in Doom with
 `treesit-font-lock-level 4`, against the same file in nvim with
-`:colorscheme kanagawa-dragon`. Strings, keywords, type names,
+`:colorscheme kanagawa-dragon` (or `:colorscheme kanagawa-wave` against
+`kanagawa-wave-nvim`). Strings, keywords, type names,
 function calls, parameters, and operators should all pick out
-distinctly — same hue, same role.
+distinctly: same hue, same role.
 
 ## Testing
 
@@ -119,23 +124,32 @@ Tests run under `emacs -Q --batch`, so they don't touch your config.
 
 ```
 kanagawa-dragon-nvim.el         Palette helper (alist + lookup fn)
-kanagawa-dragon-nvim-theme.el   The deftheme — every face mapping
+kanagawa-dragon-nvim-theme.el   The Dragon deftheme: every face mapping
+kanagawa-wave-nvim-theme.el     The Wave deftheme: same face set, Wave values
 spec.md                         Authoritative palette + face contract
 roadmap.md                      Phased build, ticked when shipped
 patchnotes.md                   Release notes (newest at top)
+VERSION                         Single source of truth for the version
+Makefile                        make test / make compile / make clean
+.github/workflows/ci.yml        CI: byte-compile + theme load + tests
+CLAUDE.md                       Guidance for coding agents (AGENTS.md symlinks to it)
 tests/
   test-palette.el               Palette ↔ upstream byte-for-byte
   test-faces.el                 Critical face attributes resolve correctly
   sample.{java,py,el}           Visual eyeball buffers
 ```
 
-## What's NOT in v0.1
+## What's NOT in v0.2
 
-- Wave or Lotus variants. Dragon-only on first release; the palette
-  helper is structured so siblings can be added later without touching
-  shipped code.
-- A light-mode toggle.
-- A `doom-themes` macro dependency. This is a vanilla `deftheme`; Doom
+- A Lotus (light) variant. Dragon and Wave are both dark; Lotus is the
+  remaining upstream variant, planned for v0.3.
+- Light/dark auto-detection. It will load Wave or Dragon from
+  `frame-background-mode`; Wave's landing in v0.2.0 unblocked it, and
+  it is the next v0.3 item.
+- A tab look-parity pass against nvim's `bufferline.nvim`. The
+  `centaur-tabs` / `tab-bar` / `tab-line` faces are mapped; judging
+  them side-by-side against nvim is still open.
+- A `doom-themes` macro dependency. Still a vanilla `deftheme`; Doom
   faces are mapped explicitly so the theme is portable to vanilla Emacs.
 
 See [`roadmap.md`](roadmap.md) for what's planned next.

@@ -46,5 +46,12 @@ jobs:
             --eval "(load-theme 'kanagawa-dragon-nvim t)" \
             --eval "(message \"theme loaded OK\")"
 
+      - name: Load Wave theme without error
+        run: |
+          emacs -Q --batch -L . \
+            --eval "(add-to-list 'custom-theme-load-path default-directory)" \
+            --eval "(load-theme 'kanagawa-wave-nvim t)" \
+            --eval "(message \"wave theme loaded OK\")"
+
       - name: ERT test suite
         run: make test

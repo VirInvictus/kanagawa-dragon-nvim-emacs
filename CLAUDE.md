@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance for working on this repository.
 
 ## What this is
 
@@ -30,27 +30,31 @@ The selector is a regexp over deftest names (the `kdn-palette/*`, `kdn-faces/*`,
 
 ## Architecture
 
-Two source files, one role each. Keep them separate; don't fold the palette into the theme file or vice versa.
+Three source files, one role each. Keep them separate; don't fold the palette into a theme file or vice versa.
 
 ### `kanagawa-dragon-nvim.el` — palette + helpers, no theme activation
 
-- Exports `kanagawa-dragon-nvim-palette` (an alist of `(symbol . "#hex")`) and `kanagawa-dragon-nvim-color` (lookup fn that errors on unknown names).
-- Loading this file does NOT enable the theme. It is `(require)`d by the theme file and is also intended for other consumers (statuslines, sibling ports) that want the exact hex values without reimplementing them.
+- Exports `kanagawa-dragon-nvim-palette` (an alist of `(symbol . "#hex")` covering Dragon, Wave, and the shared pool) and `kanagawa-dragon-nvim-color` (lookup fn that errors on unknown names).
+- Loading this file does NOT enable either theme. It is `(require)`d by both theme files and is also intended for other consumers (statuslines, sibling ports) that want the exact hex values without reimplementing them.
 - Holds `kanagawa-dragon-nvim-version`, which a test asserts equals the trimmed contents of `VERSION`. Bumping a release means updating **both** in the same commit; the same string also appears in the file headers of both `.el` files. Four places, one number.
 - Hosts the opt-in `kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed` helper (see "LSP modifier bleed" below).
 
-### `kanagawa-dragon-nvim-theme.el` — the deftheme, every face mapping
+### `kanagawa-dragon-nvim-theme.el` — the Dragon deftheme, every face mapping
 
 Single `(let* ...)` that pulls palette entries into short locals (`bg`, `fg`, `s-string`, `s-keyword`, `s-fun`, `s-type`, `s-ident`, `s-param`, `s-operator`, `s-punct`, `d-error`, `vcs-add`, etc.), then a long `custom-theme-set-faces` form. Doom UI faces (`doom-modeline-*`, `solaire-*`, `doom-dashboard-*`) are mapped explicitly so the theme is portable to vanilla Emacs (they no-op if those packages aren't loaded). ANSI / term colors mirror the upstream `extras/alacritty/kanagawa_dragon.toml` mapping verbatim.
 
+### `kanagawa-wave-nvim-theme.el` — the Wave deftheme, same face set
+
+Structurally a mirror of the Dragon theme: the identical face-set body under the `kanagawa-wave-nvim` theme name, with the `let*` binding table resolved through the Wave role values. `spec.md`'s "Wave role mapping" section is the contract for every difference. Both theme files must keep the same face set; the structural tests in `tests/test-faces.el` enforce uniqueness and palette membership for both. Wave's ANSI row follows `themes.lua`'s `term[1..18]` (upstream's alacritty wave extra differs from it on normal black only; the spec records this).
+
 ### `spec.md` is the contract
 
-Two tables (Dragon-specific palette, shared Wave-origin palette) with hex values that must match upstream byte-for-byte. The face mapping table cites the nvim semantic role (`syn.fun`, `ui.bg_visual`, `diag.warning`, etc.) for every face. If spec and code disagree, the spec is authoritative; fix the code. Palette symbol names match upstream casing (`dragonBlack3`, `dragonGreen2`, `waveBlue1`) so the spec can be cross-referenced mechanically against `kanagawa.nvim/lua/kanagawa/colors.lua`.
+Three palette tables (Dragon-specific, Wave-specific, shared) with hex values that must match upstream byte-for-byte. The face mapping table cites the nvim semantic role (`syn.fun`, `ui.bg_visual`, `diag.warning`, etc.) for every face, and the Wave role mapping resolves every one of those bindings to its Wave value. If spec and code disagree, the spec is authoritative; fix the code. Palette symbol names match upstream casing (`dragonBlack3`, `sumiInk3`, `waveBlue1`) so the spec can be cross-referenced mechanically against `kanagawa.nvim/lua/kanagawa/colors.lua`.
 
 ### Tests
 
-- `tests/test-palette.el` — byte-for-byte palette match against an in-test copy of upstream's `colors.lua`, no stray entries, lookup helper behaviour, `VERSION` ↔ constant sync.
-- `tests/test-faces.el` — spot-checks the load-bearing faces (the Java treesit ones that motivated the project) plus regression coverage for the LSP semhl variable/modifier fixes. Reads from the theme's `theme-settings` property rather than calling `face-attribute`, because in `emacs -Q --batch` many external faces (`solaire-*`, `doom-modeline-*`, `org-*`, `ansi-color-*`) aren't defined yet; the test verifies the *theme* sets the right spec, not whether the face has been realized.
+- `tests/test-palette.el` — byte-for-byte palette match against in-test copies of upstream's `colors.lua` (dragon, wave, and shared tables), no stray entries, lookup helper behaviour, `VERSION` ↔ constant sync.
+- `tests/test-faces.el` — spot-checks the load-bearing faces (the Java treesit ones that motivated the project) plus regression coverage for the LSP semhl variable/modifier fixes, for BOTH themes (wave expectations mirror the Dragon set with Wave values). Also carries two structural invariants over both themes: every hex in every face spec is a palette member, and no face is specified twice per theme. Reads from each theme's `theme-settings` property rather than calling `face-attribute`, because in `emacs -Q --batch` many external faces (`solaire-*`, `doom-modeline-*`, `org-*`, `ansi-color-*`) aren't defined yet; the test verifies the *theme* sets the right spec, not whether the face has been realized. The spec-attr helper takes the theme name as its first argument.
 - `tests/sample.{java,py,el}` — visual eyeball buffers. The acceptance check is `sample.java` opened in Doom with `treesit-font-lock-level 4`, compared against the same file in nvim with `:colorscheme kanagawa-dragon`. Same hue, same role for keywords / types / strings / function calls / operators / parameters.
 
 ## LSP modifier bleed (load-bearing context)
@@ -67,6 +71,6 @@ Wired into Doom via a local-repo `package!` recipe in `~/.config/doom/packages.e
 
 ## Adding palette entries or face mappings
 
-1. Add the hex to `kanagawa-dragon-nvim-palette` AND to the matching upstream table in `tests/test-palette.el` (`kdn-test--upstream-dragon-palette` or `kdn-test--upstream-shared-palette`) AND to `spec.md`. All three must agree; the `no-stray-entries` test enforces it.
-2. For a new face mapping, add the row to the spec table first (with its nvim origin), then to `kanagawa-dragon-nvim-theme.el`, then a spot-check in `tests/test-faces.el` if it's load-bearing.
+1. Add the hex to `kanagawa-dragon-nvim-palette` AND to the matching upstream table in `tests/test-palette.el` (`kdn-test--upstream-dragon-palette`, `kdn-test--upstream-wave-palette`, or `kdn-test--upstream-shared-palette`) AND to `spec.md`. All three must agree; the `no-stray-entries` test enforces it.
+2. For a new face mapping, add the row to the spec table first (with its nvim origin), then to BOTH theme files (Dragon value + Wave role value), then a spot-check in `tests/test-faces.el` if it's load-bearing.
 3. Run `make compile` (warnings are errors) and `make test`.
