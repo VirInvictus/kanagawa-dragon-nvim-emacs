@@ -93,3 +93,24 @@ Tick boxes when shipped. Each phase is independently usable.
 - Doom-themes-style theme with `def-doom-theme` — keeping vanilla so the
   theme works in plain Emacs.
 - Auto-screenshot regression harness — too brittle, eyeballing wins.
+
+## New findings 2026-09-12 (six-lens full audit; detail: audit/FULL-AUDIT-2026-09-12.md, Wave 22)
+
+- [ ] **line-number colour drift:** spec's face table says dragonBlack6;
+      the theme binds bg-p2 = dragonBlack5 and the test pins dragonBlack5
+      - code+test agree against the spec, violating the "spec is
+      authoritative" rule. One edit: correct the spec row to Black5 (or
+      move the theme).
+- [ ] **The 09-05 URL fix was partial:** the Doom recipe still uses
+      :local-repo with Brandon's literal home path and the vanilla example
+      hardcodes it. Give Doom a proper github recipe; genericize the
+      snippet.
+- [ ] **Stale prose:** "What's NOT in v0.1" heading at v0.1.4 + the Wave
+      deferral wording predates the v0.1.4 roadmap correction; the CI
+      tick's owed patchnotes mention is still queued; Layout omits
+      Makefile/VERSION/CI/AGENTS.md.
+- [ ] **On the queued v0.1.4 tag lane:** pair the tag with a GitHub
+      Release (populates latestRelease); the repo is PRIVATE so the
+      drafted description/topics wait for a public flip; note the LICENSE
+      appendix makes GitHub classify "Other" (accept or move the credit
+      to the README only).
