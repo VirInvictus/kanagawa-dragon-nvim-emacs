@@ -50,6 +50,26 @@
   "Dragon-specific palette as it appears in upstream colors.lua.
 If upstream changes, sync this constant in lockstep with the palette.")
 
+(defconst kdn-test--upstream-wave-palette
+  '((sumiInk0      . "#16161D")
+    (sumiInk1      . "#181820")
+    (sumiInk2      . "#1a1a22")
+    (sumiInk3      . "#1F1F28")
+    (sumiInk4      . "#2A2A37")
+    (sumiInk5      . "#363646")
+    (oniViolet     . "#957FB8")
+    (oniViolet2    . "#b8b4d0")
+    (crystalBlue   . "#7E9CD8")
+    (springViolet2 . "#9CABCA")
+    (sakuraPink    . "#D27E99")
+    (surimiOrange  . "#FFA066")
+    (peachRed      . "#FF5D62")
+    (boatYellow2   . "#C0A36E"))
+  "Wave-specific palette as it appears in upstream colors.lua
+(sumi background ladder plus the wave accents the wave theme adds on
+top of the shared pool).  If upstream changes, sync this constant in
+lockstep with the palette.")
+
 (defconst kdn-test--upstream-shared-palette
   '((dragonBlue    . "#658594")
     (fujiWhite     . "#DCD7BA")
@@ -95,11 +115,22 @@ If upstream changes, sync this constant in lockstep with the palette.")
       (should actual)
       (should (string= expected actual)))))
 
+(ert-deftest kdn-palette/every-wave-entry-matches-upstream ()
+  "Every Wave-specific hex is reproduced byte-for-byte."
+  (dolist (entry kdn-test--upstream-wave-palette)
+    (let* ((name (car entry))
+           (expected (cdr entry))
+           (actual (cdr (assq name kanagawa-dragon-nvim-palette))))
+      (should actual)
+      (should (string= expected actual)))))
+
 (ert-deftest kdn-palette/no-stray-entries ()
-  "Palette contains exactly the union of dragon + shared entries — no
-unexpected names that drifted in.  Catches typos like a stray `dragonBlu'."
+  "Palette contains exactly the union of dragon + wave + shared
+entries — no unexpected names that drifted in.  Catches typos like a
+stray `dragonBlu'."
   (let ((expected-names
          (append (mapcar #'car kdn-test--upstream-dragon-palette)
+                 (mapcar #'car kdn-test--upstream-wave-palette)
                  (mapcar #'car kdn-test--upstream-shared-palette)))
         (actual-names (mapcar #'car kanagawa-dragon-nvim-palette)))
     (should (equal (sort (copy-sequence expected-names) #'string<)

@@ -10,14 +10,16 @@
 
 ;;; Commentary:
 
-;; Palette helper plus optional setup utilities for
-;; `kanagawa-dragon-nvim-theme'.  Exposes the Dragon palette as an
-;; alist so other code (statuslines, packages that render with a
-;; custom palette, ports of the same theme to other UI surfaces) can
-;; reuse the exact hex values without reimplementing them.
+;; Palette helper plus optional setup utilities for the
+;; `kanagawa-dragon-nvim' and `kanagawa-wave-nvim' themes.  Exposes the
+;; Dragon and Wave palettes as an alist so other code (statuslines,
+;; packages that render with a custom palette, ports of the same theme
+;; to other UI surfaces) can reuse the exact hex values without
+;; reimplementing them.
 ;;
-;; Loading this file does not enable the theme.  Use
-;; `(load-theme 'kanagawa-dragon-nvim t)' for that.
+;; Loading this file does not enable either theme.  Use
+;; `(load-theme 'kanagawa-dragon-nvim t)' or
+;; `(load-theme 'kanagawa-wave-nvim t)' for that.
 ;;
 ;; Optional helper:
 ;; `kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed' fixes a
@@ -58,7 +60,23 @@
     (dragonAsh     . "#737c73")
     (dragonTeal    . "#949fb5")
     (dragonYellow  . "#c4b28a")
-    ;; Shared (Wave-origin) entries used by Dragon's mapping
+    ;; Wave backgrounds (sumi ladder, cool darks)
+    (sumiInk0      . "#16161D")
+    (sumiInk1      . "#181820")
+    (sumiInk2      . "#1a1a22")
+    (sumiInk3      . "#1F1F28")
+    (sumiInk4      . "#2A2A37")
+    (sumiInk5      . "#363646")
+    ;; Wave accents
+    (oniViolet     . "#957FB8")
+    (oniViolet2    . "#b8b4d0")
+    (crystalBlue   . "#7E9CD8")
+    (springViolet2 . "#9CABCA")
+    (sakuraPink    . "#D27E99")
+    (surimiOrange  . "#FFA066")
+    (peachRed      . "#FF5D62")
+    (boatYellow2   . "#C0A36E")
+    ;; Shared entries used by both themes' mappings
     (dragonBlue    . "#658594")
     (fujiWhite     . "#DCD7BA")
     (oldWhite      . "#C8C093")
@@ -83,7 +101,7 @@
     (autumnRed     . "#C34043")
     (autumnGreen   . "#76946A")
     (autumnYellow  . "#DCA561"))
-  "Kanagawa Dragon palette.
+  "Kanagawa Dragon and Wave palettes.
 Hex values reproduced verbatim from
 `kanagawa.nvim/lua/kanagawa/colors.lua' upstream.  Names match upstream
 casing exactly so the spec can be cross-referenced mechanically.")
