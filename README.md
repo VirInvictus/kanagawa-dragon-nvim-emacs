@@ -31,7 +31,7 @@ In `~/.config/doom/packages.el`:
 
 ```elisp
 (package! kanagawa-dragon-nvim
-  :recipe (:local-repo "~/.gitrepos/kanagawa-dragon-nvim-emacs"
+  :recipe (:host github :repo "VirInvictus/kanagawa-dragon-nvim-emacs"
            :files ("*.el")))
 ```
 
@@ -45,10 +45,10 @@ Then run `doom sync && doom run`.
 
 ### Vanilla Emacs (≥ 29.1)
 
-Put the repo on `custom-theme-load-path`, then:
+Clone the repo wherever you like, then point `custom-theme-load-path` at it:
 
 ```elisp
-(add-to-list 'custom-theme-load-path "~/.gitrepos/kanagawa-dragon-nvim-emacs/")
+(add-to-list 'custom-theme-load-path "/path/to/kanagawa-dragon-nvim-emacs/")
 (load-theme 'kanagawa-dragon-nvim t)
 ```
 
