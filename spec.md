@@ -1,13 +1,14 @@
 # spec.md — kanagawa-dragon-nvim-emacs
 
-The contract for this theme. If a face mapping or palette value disagrees
-with this document, the document is authoritative; fix the code.
+The contract for this theme family. If a face mapping or palette value
+disagrees with this document, the document is authoritative; fix the code.
 
 ## Goals
 
-1. **Faithful to nvim's Kanagawa-Dragon.** Side-by-side a Java buffer in
-   Doom Emacs and the same buffer in nvim with `kanagawa-dragon` should
-   feel like the same theme, not "two theme families that share a name."
+1. **Faithful to nvim's Kanagawa themes.** Side-by-side a Java buffer in
+   Doom Emacs and the same buffer in nvim with `kanagawa-dragon` (or
+   `kanagawa-wave`) should feel like the same theme, not "two theme
+   families that share a name."
 2. **Vanilla-Emacs portable.** Built on `deftheme`, no `doom-themes`
    macro dependency. Doom-specific faces are mapped, but loading in
    vanilla Emacs must not error.
@@ -19,7 +20,8 @@ with this document, the document is authoritative; fix the code.
 
 ## Non-goals (v0.1)
 
-- Wave or Lotus variants.
+- Wave or Lotus variants. (Superseded in part: Wave shipped in v0.2.0.
+  Lotus, the light variant, remains out of scope.)
 - Light-mode toggle.
 - Auto-detect terminal vs GUI palette.
 - Compatibility shims for Emacs <29.
@@ -58,7 +60,26 @@ referencing is mechanical. Hex values are bit-for-bit identical.
 | `dragonTeal`   | `#949fb5` | special-1                          |
 | `dragonYellow` | `#c4b28a` | identifiers                        |
 
-### Shared palette (Wave-origin, used by Dragon)
+### Wave-specific palette
+
+| Name            | Hex       | Role                               |
+|-----------------|-----------|------------------------------------|
+| `sumiInk0`      | `#16161D` | bg-m3, float bg                    |
+| `sumiInk1`      | `#181820` | bg-dim, bg-m2                      |
+| `sumiInk2`      | `#1a1a22` | bg-m1                              |
+| `sumiInk3`      | `#1F1F28` | **default bg** (Wave)              |
+| `sumiInk4`      | `#2A2A37` | bg-p1, bg-gutter (hl-line)         |
+| `sumiInk5`      | `#363646` | bg-p2                              |
+| `oniViolet`     | `#957FB8` | **keywords**, statements           |
+| `oniViolet2`    | `#b8b4d0` | parameters                         |
+| `crystalBlue`   | `#7E9CD8` | **functions**                      |
+| `springViolet2` | `#9CABCA` | punctuation                        |
+| `sakuraPink`    | `#D27E99` | **numbers**                        |
+| `surimiOrange`  | `#FFA066` | constants                          |
+| `peachRed`      | `#FF5D62` | special-3                          |
+| `boatYellow2`   | `#C0A36E` | **operators**, regex               |
+
+### Shared palette (used by both variants)
 
 | Name           | Hex       | Role                                  |
 |----------------|-----------|---------------------------------------|
@@ -90,7 +111,10 @@ referencing is mechanical. Hex values are bit-for-bit identical.
 ## Face mapping
 
 Each face cites the nvim semantic role from `themes.lua`'s `dragon` block
-(`syn.*`, `ui.*`, `diag.*`, `diff.*`, `vcs.*`, `term[N]`).
+(`syn.*`, `ui.*`, `diag.*`, `diff.*`, `vcs.*`, `term[N]`). The tables in
+this section are the Dragon mapping; the Wave variant sets the identical
+face set with the Wave role values from `themes.lua`'s `wave` block (see
+"Wave role mapping" at the end of this section).
 
 ### Core UI
 
@@ -203,15 +227,79 @@ opinionated and not part of nvim's flavor):
 Mirrors nvim's `term[1..18]` Dragon mapping verbatim
 (see palette table for which color goes where).
 
+### Wave role mapping
+
+`kanagawa-wave-nvim-theme.el` (shipped v0.2.0) sets every face in the
+tables above; this role table is where each of Dragon's bindings
+resolves for Wave. Values come verbatim from `themes.lua`'s `wave`
+block. The diagnostics, diff, and vcs roles are identical to Dragon's
+(`samuraiRed`, `roninYellow`, `dragonBlue`, `springGreen`; `winter*`
+diff backgrounds; `autumn*` gutter foregrounds).
+
+| Role               | Wave value      | Dragon value (for contrast)  |
+|--------------------|-----------------|------------------------------|
+| `ui.fg`            | `fujiWhite`     | `dragonWhite`                |
+| `ui.fg_dim`        | `oldWhite`      | `oldWhite`                   |
+| `ui.bg_dim`        | `sumiInk1`      | `dragonBlack1`               |
+| `ui.bg_m3`         | `sumiInk0`      | `dragonBlack0`               |
+| `ui.bg_m2`         | `sumiInk1`      | `dragonBlack1`               |
+| `ui.bg_m1`         | `sumiInk2`      | `dragonBlack2`               |
+| `ui.bg`            | `sumiInk3`      | `dragonBlack3`               |
+| `ui.bg_p1`         | `sumiInk4`      | `dragonBlack4`               |
+| `ui.bg_p2`         | `sumiInk5`      | `dragonBlack5`               |
+| `ui.bg_gutter`     | `sumiInk4`      | `dragonBlack4`               |
+| `ui.special`       | `springViolet1` | `dragonGray3`                |
+| `ui.nontext`       | `sumiInk6`      | `dragonBlack6`               |
+| `ui.whitespace`    | `sumiInk6`      | `dragonBlack6`               |
+| `ui.bg_visual`     | `waveBlue1`     | `waveBlue1`                  |
+| `ui.bg_search`     | `waveBlue2`     | `waveBlue2`                  |
+| `ui.pmenu.bg`      | `waveBlue1`     | `waveBlue1`                  |
+| `ui.pmenu.bg_sel`  | `waveBlue2`     | `waveBlue2`                  |
+| `ui.float.bg`      | `sumiInk0`      | `dragonBlack0`               |
+| `ui.float.border`  | `sumiInk6`      | `sumiInk6`                   |
+| `syn.string`       | `springGreen`   | `dragonGreen2`               |
+| `syn.number`       | `sakuraPink`    | `dragonPink`                 |
+| `syn.constant`     | `surimiOrange`  | `dragonOrange`               |
+| `syn.identifier`   | `carpYellow`    | `dragonYellow`               |
+| `syn.parameter`    | `oniViolet2`    | `dragonGray`                 |
+| `syn.fun`          | `crystalBlue`   | `dragonBlue2`                |
+| `syn.statement`    | `oniViolet`     | `dragonViolet`               |
+| `syn.keyword`      | `oniViolet`     | `dragonViolet`               |
+| `syn.operator`     | `boatYellow2`   | `dragonRed`                  |
+| `syn.preproc`      | `waveRed`       | `dragonRed`                  |
+| `syn.type`         | `waveAqua2`     | `dragonAqua`                 |
+| `syn.regex`        | `boatYellow2`   | `dragonRed`                  |
+| `syn.deprecated`   | `katanaGray`    | `katanaGray`                 |
+| `syn.comment`      | `fujiGray`      | `dragonAsh`                  |
+| `syn.punct`        | `springViolet2` | `dragonGray2`                |
+| `syn.special1`     | `springBlue`    | `dragonTeal`                 |
+| `syn.special2`     | `waveRed`       | `dragonRed`                  |
+| `syn.special3`     | `peachRed`      | `dragonRed`                  |
+
+Derived rows follow the same derivations as Dragon: the `line-number`
+foreground is `ui.bg_p2` (`sumiInk5`), Org headings step by hue through
+the Wave accent ladder (`oniViolet`, `crystalBlue`, `waveAqua2`,
+`springGreen`, `carpYellow`, `surimiOrange`, `sakuraPink`,
+`boatYellow2`), and the Doom/solaire surfaces ride the Wave ladder the
+same way the Dragon tables ride the Dragon ladder.
+
+Wave's ANSI / term colors mirror `term[1..18]` from the `wave` block.
+Upstream's alacritty extra (`extras/alacritty/kanagawa_wave.toml`)
+picks `#090618` for normal black; the theme follows `themes.lua`
+(`sumiInk0`) instead, which is what nvim actually renders. Every other
+slot agrees with the alacritty extra.
+
 ## Conformance
 
 The theme is conformant when:
 
 1. Every palette entry in this spec exists in `kanagawa-dragon-nvim.el`
    with the exact hex shown.
-2. Every face mapping above is set in `kanagawa-dragon-nvim-theme.el`.
+2. Every face mapping above is set in `kanagawa-dragon-nvim-theme.el`,
+   and `kanagawa-wave-nvim-theme.el` resolves the same face set through
+   the Wave role mapping.
 3. `tests/test-palette.el` and `tests/test-faces.el` pass under
    `emacs -Q --batch`.
 4. Visual eyeballing of `tests/sample.java` (Java tree-sitter,
    `treesit-font-lock-level 4`) matches the upstream nvim screenshot
-   for the same file.
+   for the same file, each variant against its own nvim counterpart.
