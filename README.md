@@ -17,7 +17,7 @@ that's bit-for-bit correct, but doesn't map the **Emacs 29+ tree-sitter
 font-lock faces** that modern modes use at `treesit-font-lock-level 4`.
 The result, in Doom Emacs with `(java-mode . java-ts-mode)` remapping,
 is a Java buffer where keywords, type names, function calls, operators,
-and parameters all collapse to the default foreground — losing nearly
+and parameters all collapse to the default foreground, losing nearly
 all of Dragon's semantic distinction.
 
 This theme maps every face the spec lists, including the new treesit
@@ -73,7 +73,7 @@ Or via straight:
 - Emacs **29.1+** (the theme depends on the tree-sitter `font-lock-*`
   faces introduced in 29).
 - For the Doom UI faces to take effect, `doom-modeline` /
-  `solaire-mode` / `doom-dashboard` need to be loaded — but their
+  `solaire-mode` / `doom-dashboard` need to be loaded, but their
   absence is harmless; the theme just no-ops those mappings.
 
 ## LSP semantic-tokens setup (optional, recommended)
@@ -161,7 +161,7 @@ See [`roadmap.md`](roadmap.md) for what's planned next.
 ## License
 
 MIT. Palette values originate from `kanagawa.nvim` (also MIT) by
-rebelot — see [`LICENSE`](LICENSE) for the credit notice.
+rebelot; see [`LICENSE`](LICENSE) for the credit notice.
 
 ## Support
 

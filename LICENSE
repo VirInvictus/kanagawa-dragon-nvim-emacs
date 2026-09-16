@@ -22,8 +22,8 @@ SOFTWARE.
 
 ---
 
-This project is a faithful, independent port of the Dragon variant of
-kanagawa.nvim (https://github.com/rebelot/kanagawa.nvim) by rebelot, also
-distributed under the MIT License. Palette values reproduced here originate
-from that project; semantic role assignments mirror its `themes.lua` Dragon
-mapping.
+This project is a faithful, independent port of the Dragon and Wave
+variants of kanagawa.nvim (https://github.com/rebelot/kanagawa.nvim) by
+rebelot, also distributed under the MIT License. Palette values
+reproduced here originate from that project; semantic role assignments
+mirror its `themes.lua` Dragon and Wave mappings.

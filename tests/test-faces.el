@@ -176,9 +176,11 @@ markers, and the modifier's colour wins the face composition."
   (kdn-test--should-fg 'doom-modeline-buffer-file 'dragonAqua)
   (kdn-test--should-fg 'doom-modeline-info        'dragonGreen2))
 
-(ert-deftest kdn-faces/solaire-bg-darker-than-default ()
-  "Solaire's slightly-darker bg is what makes Doom buffers feel right —
-guard against accidentally using `bg' itself."
+(ert-deftest kdn-faces/solaire-bg-distinct-from-default ()
+  "Solaire's bg sits one step off the default, which is what makes
+Doom buffers feel right: Dragon lightens real buffers (dragonBlack2
+over dragonBlack3), Wave darkens them (sumiInk2 over sumiInk3). Guard
+against accidentally using `bg' itself, in either direction."
   (kdn-test--load-theme)
   (kdn-test--should-bg 'solaire-default-face 'dragonBlack2)
   (kdn-test--should-bg 'default              'dragonBlack3))

@@ -507,6 +507,10 @@
    `(lsp-face-semhl-struct              ((t (:foreground ,s-type))))
    `(lsp-face-semhl-type                ((t (:foreground ,s-type))))
    `(lsp-face-semhl-type-parameter      ((t (:foreground ,s-type))))
+   ;; typeparameter / enummember are not defface'd by current lsp-mode
+   ;; (the hyphenated -type-parameter / -enum-member are the real
+   ;; faces). Kept so a reference to these legacy names still resolves
+   ;; to a themed face.
    `(lsp-face-semhl-typeparameter       ((t (:foreground ,s-type))))
    `(lsp-face-semhl-namespace           ((t (:foreground ,s-type))))
    `(lsp-face-semhl-function            ((t (:foreground ,s-fun))))
@@ -532,6 +536,8 @@
    ;; face-level counterpart of the variable-level
    ;; `kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed').  deprecated
    ;; is the deliberate exception: it keeps a strike-through.
+   ;; declaration and readonly are not defface'd by lsp-mode at all;
+   ;; their rows are harmless pins.
    `(lsp-face-semhl-definition          ((t (:inherit unspecified))))
    `(lsp-face-semhl-declaration         ((t (:inherit unspecified))))
    `(lsp-face-semhl-implementation      ((t (:inherit unspecified))))
