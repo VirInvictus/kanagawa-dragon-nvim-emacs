@@ -530,6 +530,49 @@ alacritty extra's #090618 black is deliberately not used (see spec)."
   (kdn-test--wave-should-fg 'git-gutter:modified 'autumnYellow))
 
 ;; ------------------------------------------------------------------
+;; Integration surfaces (v0.2.1): avy / consult / embark / transient /
+;; ediff / smerge.  Representative rows per family; the structural
+;; tests (uniqueness, palette membership, cross-theme equality) cover
+;; the full set.
+;; ------------------------------------------------------------------
+
+(ert-deftest kdn-faces/integration-surfaces ()
+  (kdn-test--load-theme)
+  (kdn-test--should-bg 'avy-lead-face-0 'dragonBlue2)
+  (kdn-test--should-fg 'avy-background-face 'oldWhite)
+  (kdn-test--should-fg 'consult-async-failed 'samuraiRed)
+  (kdn-test--should-fg 'consult-key 'dragonYellow)
+  (kdn-test--should-fg 'consult-line-number 'dragonBlack5)
+  (kdn-test--should-fg 'embark-target 'dragonBlue2)
+  (kdn-test--should-fg 'transient-key 'dragonYellow)
+  (kdn-test--should-bg 'transient-enabled-suffix 'winterGreen)
+  (kdn-test--should-bg 'transient-disabled-suffix 'winterRed)
+  (kdn-test--should-bg 'ediff-current-diff-A 'winterRed)
+  (kdn-test--should-bg 'ediff-current-diff-B 'winterGreen)
+  (kdn-test--should-fg 'ediff-current-diff-C 'autumnYellow)
+  (kdn-test--should-bg 'smerge-upper 'winterRed)
+  (kdn-test--should-bg 'smerge-lower 'winterGreen)
+  (kdn-test--should-fg 'smerge-markers 'dragonViolet))
+
+(ert-deftest kdn-faces/wave-integration-surfaces ()
+  (kdn-test--load-wave-theme)
+  (kdn-test--wave-should-bg 'avy-lead-face-0 'crystalBlue)
+  (kdn-test--wave-should-fg 'avy-background-face 'oldWhite)
+  (kdn-test--wave-should-fg 'consult-async-failed 'samuraiRed)
+  (kdn-test--wave-should-fg 'consult-key 'carpYellow)
+  (kdn-test--wave-should-fg 'consult-line-number 'sumiInk5)
+  (kdn-test--wave-should-fg 'embark-target 'crystalBlue)
+  (kdn-test--wave-should-fg 'transient-key 'carpYellow)
+  (kdn-test--wave-should-bg 'transient-enabled-suffix 'winterGreen)
+  (kdn-test--wave-should-bg 'transient-disabled-suffix 'winterRed)
+  (kdn-test--wave-should-bg 'ediff-current-diff-A 'winterRed)
+  (kdn-test--wave-should-bg 'ediff-current-diff-B 'winterGreen)
+  (kdn-test--wave-should-fg 'ediff-current-diff-C 'autumnYellow)
+  (kdn-test--wave-should-bg 'smerge-upper 'winterRed)
+  (kdn-test--wave-should-bg 'smerge-lower 'winterGreen)
+  (kdn-test--wave-should-fg 'smerge-markers 'oniViolet))
+
+;; ------------------------------------------------------------------
 ;; Structural invariants (both themes).  The 2026-09-12 audit noted
 ;; every face spec must be unique and well-formed; these tests encode
 ;; that invariant so a porting slip fails by name instead of shipping.

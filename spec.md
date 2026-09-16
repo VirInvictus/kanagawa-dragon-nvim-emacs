@@ -242,6 +242,94 @@ are `term[9..16]`; bright faces shipped v0.2.1). vterm reads each
 color face's background as its palette entry, so the vterm color
 faces set foreground and background to the same hex.
 
+### Integration surfaces (v0.2.1)
+
+avy, consult, embark, transient, ediff, and smerge have no nvim
+counterpart; their bindings derive from this theme's own role
+semantics. Both variants set the identical face set, with bindings
+written in role terms resolved by each variant's binding table:
+`syn.keyword`/`syn.fun`/`syn.type`/`syn.string` are the four
+`avy-lead-face` accents, `s-ident` is the keybinding colour (matching
+`which-key-key-face` and `consult-key`), and the ediff/smerge
+surfaces ride the same `winter*`-background / `autumn*`-foreground
+diff split as the Diff/VCS section (`A`/`upper` as removed, `B`/
+`lower` as added, `C`/`base` as changed, `Ancestor`/`markers` as
+neutral).
+
+Faces whose upstream defface already inherits a face this theme
+remaps are deliberately unmapped: `transient-argument` and
+`transient-value` ride `font-lock-string-face`, the inactive/inapt
+family rides `shadow`, and the six `transient-key-*` flavours ride
+`transient-key`.
+
+| Face                                  | Binding                                        | Origin  |
+|---------------------------------------|------------------------------------------------|---------|
+| `avy-lead-face`                       | bg `syn.keyword`, fg `ui.bg`, bold             | derived |
+| `avy-lead-face-0`                     | bg `syn.fun`, fg `ui.bg`, bold                 | derived |
+| `avy-lead-face-1`                     | bg `syn.type`, fg `ui.bg`, bold                | derived |
+| `avy-lead-face-2`                     | bg `syn.string`, fg `ui.bg`, bold              | derived |
+| `avy-goto-char-timer-face`            | bg `ui.bg_p1`, fg `ui.fg`                      | derived |
+| `avy-background-face`                 | fg `ui.fg_dim`                                 | derived |
+| `consult-async-split`                 | fg `syn.punct`                                 | derived |
+| `consult-async-running`               | fg `syn.fun`                                   | derived |
+| `consult-async-option`                | fg `ui.fg_dim`                                 | derived |
+| `consult-async-finished`              | fg `diag.ok`                                   | derived |
+| `consult-async-failed`                | fg `diag.error`                                | derived |
+| `consult-bookmark`                    | fg `syn.type`                                  | derived |
+| `consult-buffer`                      | fg `ui.fg`                                     | derived |
+| `consult-file`                        | fg `syn.fun`                                   | derived |
+| `consult-grep-context`                | fg `ui.fg_dim`                                 | derived |
+| `consult-help`                        | fg `syn.comment`                               | derived |
+| `consult-highlight-mark`              | fg `syn.identifier`, bold                      | derived |
+| `consult-highlight-match`             | bg `ui.bg_search`, fg `ui.fg`, bold            | derived |
+| `consult-key`                         | fg `syn.identifier`, bold                      | derived |
+| `consult-line-number`                 | fg `ui.bg_p2`                                  | derived |
+| `consult-line-number-prefix`          | fg `ui.bg_p2`                                  | derived |
+| `consult-line-number-wrapped`         | fg `diag.warning`                              | derived |
+| `consult-narrow-indicator`            | fg `ui.fg_dim`                                 | derived |
+| `consult-preview-insertion`           | fg `syn.string`                                | derived |
+| `consult-preview-line`                | bg `ui.bg_p1`, extend                          | derived |
+| `consult-preview-match`               | bg `ui.bg_search`, fg `ui.fg`, bold            | derived |
+| `embark-keybinding`                   | fg `syn.identifier`, bold                      | derived |
+| `embark-keybinding-repeat`            | fg `syn.constant`, bold                        | derived |
+| `embark-keymap`                       | fg `syn.type`                                  | derived |
+| `embark-target`                       | fg `syn.fun`, underline                        | derived |
+| `embark-selected`                     | fg `syn.string`, bold                          | derived |
+| `embark-collect-annotation`           | fg `syn.comment`                               | derived |
+| `embark-collect-candidate`            | fg `ui.fg`                                     | derived |
+| `embark-collect-group-title`          | fg `syn.keyword`, bold                         | derived |
+| `embark-collect-group-separator`      | fg `syn.comment`, strike-through               | derived |
+| `embark-verbose-indicator-title`      | fg `syn.keyword`, bold                         | derived |
+| `embark-verbose-indicator-shadowed`   | fg `ui.fg_dim`                                 | derived |
+| `embark-verbose-indicator-documentation` | fg `syn.comment`, italic                    | derived |
+| `transient-key`                       | fg `syn.identifier`, bold                      | derived |
+| `transient-heading`                   | fg `syn.keyword`, bold                         | derived |
+| `transient-delimiter`                 | fg `syn.punct`                                 | derived |
+| `transient-active-infix`              | bg `ui.bg_p1`, fg `ui.fg`                      | derived |
+| `transient-enabled-suffix`            | bg `diff.add`, fg `ui.fg`, bold                | derived |
+| `transient-disabled-suffix`           | bg `diff.delete`, fg `ui.fg`, bold             | derived |
+| `transient-nonstandard-key`           | fg `syn.special1`                              | derived |
+| `transient-mismatched-key`            | fg `diag.warning`                              | derived |
+| `ediff-current-diff-A`                | bg `diff.delete`, fg `vcs.removed`             | derived |
+| `ediff-current-diff-B`                | bg `diff.add`, fg `vcs.added`                  | derived |
+| `ediff-current-diff-C`                | bg `diff.change`, fg `vcs.changed`             | derived |
+| `ediff-current-diff-Ancestor`         | bg `diff.text`, fg `ui.fg_dim`                 | derived |
+| `ediff-fine-diff-A`                   | bg `diff.delete`, fg `ui.fg`                   | derived |
+| `ediff-fine-diff-B`                   | bg `diff.add`, fg `ui.fg`                      | derived |
+| `ediff-fine-diff-C`                   | bg `diff.text`, fg `ui.fg`                     | derived |
+| `ediff-fine-diff-Ancestor`            | bg `diff.text`, fg `ui.fg_dim`                 | derived |
+| `ediff-even-diff-A/B/C/Ancestor`      | bg `ui.bg_m1`                                  | derived |
+| `ediff-odd-diff-A/B/C/Ancestor`       | bg `ui.bg_m2`                                  | derived |
+| `smerge-base`                         | bg `diff.change`                               | derived |
+| `smerge-upper`                        | bg `diff.delete`                               | derived |
+| `smerge-lower`                        | bg `diff.add`                                  | derived |
+| `smerge-markers`                      | fg `syn.keyword`, bold                         | derived |
+| `smerge-refined-added`                | bg `diff.add`, fg `ui.fg`                      | derived |
+| `smerge-refined-removed`              | bg `diff.delete`, fg `ui.fg`                   | derived |
+| `smerge-refined-changed`              | bg `diff.text`, fg `ui.fg`                     | derived |
+
+
+
 ### Wave role mapping
 
 `kanagawa-wave-nvim-theme.el` (shipped v0.2.0) sets every face in the

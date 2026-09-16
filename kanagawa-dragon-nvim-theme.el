@@ -625,6 +625,98 @@
    `(dired-perm-write       ((t (:foreground ,s-constant))))
    `(dired-ignored          ((t (:foreground ,fg-dim))))
 
+   ;; ----------------------------------------------------------------
+   ;; Integration surfaces (v0.2.1): avy / consult / embark /
+   ;; transient / ediff / smerge.  nvim has no counterpart for these;
+   ;; bindings derive from this theme's own role semantics (spec's
+   ;; "Integration surfaces" table).  Faces whose upstream defface
+   ;; already inherits a themed face (transient-argument/-value ride
+   ;; font-lock-string-face, the inactive/inapt family rides shadow,
+   ;; the transient-key-* flavours ride transient-key) stay unmapped.
+   ;; ----------------------------------------------------------------
+
+   ;; avy
+   `(avy-lead-face             ((t (:background ,s-keyword :foreground ,bg :weight bold))))
+   `(avy-lead-face-0           ((t (:background ,s-fun :foreground ,bg :weight bold))))
+   `(avy-lead-face-1           ((t (:background ,s-type :foreground ,bg :weight bold))))
+   `(avy-lead-face-2           ((t (:background ,s-string :foreground ,bg :weight bold))))
+   `(avy-goto-char-timer-face  ((t (:background ,bg-p1 :foreground ,fg))))
+   `(avy-background-face       ((t (:foreground ,fg-dim))))
+
+   ;; consult
+   `(consult-async-split       ((t (:foreground ,s-punct))))
+   `(consult-async-running     ((t (:foreground ,s-fun))))
+   `(consult-async-option      ((t (:foreground ,fg-dim))))
+   `(consult-async-finished    ((t (:foreground ,d-ok))))
+   `(consult-async-failed      ((t (:foreground ,d-error))))
+   `(consult-bookmark          ((t (:foreground ,s-type))))
+   `(consult-buffer            ((t (:foreground ,fg))))
+   `(consult-file              ((t (:foreground ,s-fun))))
+   `(consult-grep-context      ((t (:foreground ,fg-dim))))
+   `(consult-help              ((t (:foreground ,s-comment))))
+   `(consult-highlight-mark    ((t (:foreground ,s-ident :weight bold))))
+   `(consult-highlight-match   ((t (:background ,bg-search :foreground ,fg :weight bold))))
+   `(consult-key               ((t (:foreground ,s-ident :weight bold))))
+   `(consult-line-number       ((t (:foreground ,bg-p2))))
+   `(consult-line-number-prefix ((t (:foreground ,bg-p2))))
+   `(consult-line-number-wrapped ((t (:foreground ,d-warn))))
+   `(consult-narrow-indicator  ((t (:foreground ,fg-dim))))
+   `(consult-preview-insertion ((t (:foreground ,s-string))))
+   `(consult-preview-line      ((t (:background ,bg-p1 :extend t))))
+   `(consult-preview-match     ((t (:background ,bg-search :foreground ,fg :weight bold))))
+
+   ;; embark
+   `(embark-keybinding         ((t (:foreground ,s-ident :weight bold))))
+   `(embark-keybinding-repeat  ((t (:foreground ,s-constant :weight bold))))
+   `(embark-keymap             ((t (:foreground ,s-type))))
+   `(embark-target             ((t (:foreground ,s-fun :underline t))))
+   `(embark-selected           ((t (:foreground ,s-string :weight bold))))
+   `(embark-collect-annotation ((t (:foreground ,s-comment))))
+   `(embark-collect-candidate  ((t (:foreground ,fg))))
+   `(embark-collect-group-title ((t (:foreground ,s-keyword :weight bold))))
+   `(embark-collect-group-separator ((t (:foreground ,s-comment :strike-through t))))
+   `(embark-verbose-indicator-title ((t (:foreground ,s-keyword :weight bold))))
+   `(embark-verbose-indicator-shadowed ((t (:foreground ,fg-dim))))
+   `(embark-verbose-indicator-documentation ((t (:foreground ,s-comment :slant italic))))
+
+   ;; transient (the inherited families are themed through their parents)
+   `(transient-key             ((t (:foreground ,s-ident :weight bold))))
+   `(transient-heading         ((t (:foreground ,s-keyword :weight bold))))
+   `(transient-delimiter       ((t (:foreground ,s-punct))))
+   `(transient-active-infix    ((t (:background ,bg-p1 :foreground ,fg))))
+   `(transient-enabled-suffix  ((t (:background ,diff-add-bg :foreground ,fg :weight bold))))
+   `(transient-disabled-suffix ((t (:background ,diff-del-bg :foreground ,fg :weight bold))))
+   `(transient-nonstandard-key ((t (:foreground ,s-special1))))
+   `(transient-mismatched-key  ((t (:foreground ,d-warn))))
+
+   ;; ediff: A/upper as removed, B/lower as added, C/base as changed,
+   ;; Ancestor neutral — the same winter/autumn split as the diff block
+   `(ediff-current-diff-A       ((t (:background ,diff-del-bg :foreground ,vcs-del))))
+   `(ediff-current-diff-B       ((t (:background ,diff-add-bg :foreground ,vcs-add))))
+   `(ediff-current-diff-C       ((t (:background ,diff-chg-bg :foreground ,vcs-chg))))
+   `(ediff-current-diff-Ancestor ((t (:background ,diff-text-bg :foreground ,fg-dim))))
+   `(ediff-fine-diff-A          ((t (:background ,diff-del-bg :foreground ,fg))))
+   `(ediff-fine-diff-B          ((t (:background ,diff-add-bg :foreground ,fg))))
+   `(ediff-fine-diff-C          ((t (:background ,diff-text-bg :foreground ,fg))))
+   `(ediff-fine-diff-Ancestor   ((t (:background ,diff-text-bg :foreground ,fg-dim))))
+   `(ediff-even-diff-A          ((t (:background ,bg-m1))))
+   `(ediff-even-diff-B          ((t (:background ,bg-m1))))
+   `(ediff-even-diff-C          ((t (:background ,bg-m1))))
+   `(ediff-even-diff-Ancestor   ((t (:background ,bg-m1))))
+   `(ediff-odd-diff-A           ((t (:background ,bg-m2))))
+   `(ediff-odd-diff-B           ((t (:background ,bg-m2))))
+   `(ediff-odd-diff-C           ((t (:background ,bg-m2))))
+   `(ediff-odd-diff-Ancestor    ((t (:background ,bg-m2))))
+
+   ;; smerge
+   `(smerge-base               ((t (:background ,diff-chg-bg))))
+   `(smerge-upper              ((t (:background ,diff-del-bg))))
+   `(smerge-lower              ((t (:background ,diff-add-bg))))
+   `(smerge-markers            ((t (:foreground ,s-keyword :weight bold))))
+   `(smerge-refined-added      ((t (:background ,diff-add-bg :foreground ,fg))))
+   `(smerge-refined-removed    ((t (:background ,diff-del-bg :foreground ,fg))))
+   `(smerge-refined-changed    ((t (:background ,diff-text-bg :foreground ,fg))))
+
    ;; eshell / term / vterm — ANSI-mapped
    `(ansi-color-black            ((t (:foreground ,ansi-black :background ,ansi-black))))
    `(ansi-color-red              ((t (:foreground ,ansi-red))))
