@@ -31,6 +31,11 @@
 
 ;;; Code:
 
+(defgroup kanagawa-dragon-nvim nil
+  "Faithful Emacs ports of the Dragon and Wave variants of kanagawa.nvim."
+  :group 'faces
+  :prefix "kanagawa-dragon-nvim-")
+
 (defconst kanagawa-dragon-nvim-version "0.2.0"
   "Version of kanagawa-dragon-nvim.  Kept in lockstep with the VERSION file.")
 
@@ -137,7 +142,8 @@ casing exactly so the spec can be cross-referenced mechanically.")
   "Empty face used to neutralize `lsp-semantic-token-modifier-faces'.
 Substituted into bleeding modifier entries by
 `kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed' so the modifier no
-longer overrides the base token colour.")
+longer overrides the base token colour."
+  :group 'kanagawa-dragon-nvim)
 
 ;; Declared so byte-compile doesn't warn on the reference inside the
 ;; helper. Real binding comes from `lsp-semantic-tokens' when that
@@ -171,9 +177,9 @@ Recommended call site:
   (with-eval-after-load \\='lsp-semantic-tokens
     (kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed))"
   (unless (boundp 'lsp-semantic-token-modifier-faces)
-    (user-error "kanagawa-dragon-nvim: `lsp-semantic-token-modifier-faces' is not bound — call this inside `with-eval-after-load' on `lsp-semantic-tokens'"))
+    (user-error "kanagawa-dragon-nvim: `lsp-semantic-token-modifier-faces' is not bound; call this inside `with-eval-after-load' on `lsp-semantic-tokens'"))
   (dolist (mod kanagawa-dragon-nvim-lsp-bleeding-modifiers)
-    (when-let ((cell (assoc mod lsp-semantic-token-modifier-faces)))
+    (when-let* ((cell (assoc mod lsp-semantic-token-modifier-faces)))
       (setcdr cell 'kanagawa-dragon-nvim-lsp-modifier-noop))))
 
 (provide 'kanagawa-dragon-nvim)

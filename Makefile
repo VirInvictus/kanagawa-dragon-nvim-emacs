@@ -1,6 +1,6 @@
 EMACS ?= emacs
 
-.PHONY: test compile clean
+.PHONY: test compile load load-wave clean
 
 test:
 	$(EMACS) -Q --batch \
@@ -16,5 +16,19 @@ compile:
 		-f batch-byte-compile \
 		kanagawa-dragon-nvim.el kanagawa-dragon-nvim-theme.el kanagawa-wave-nvim-theme.el
 
+load:
+	$(EMACS) -Q --batch \
+		-L . \
+		--eval "(add-to-list 'custom-theme-load-path default-directory)" \
+		--eval "(load-theme 'kanagawa-dragon-nvim t)" \
+		--eval "(message \"dragon theme loaded OK\")"
+
+load-wave:
+	$(EMACS) -Q --batch \
+		-L . \
+		--eval "(add-to-list 'custom-theme-load-path default-directory)" \
+		--eval "(load-theme 'kanagawa-wave-nvim t)" \
+		--eval "(message \"wave theme loaded OK\")"
+
 clean:
-	rm -f *.elc tests/*.elc
+	rm -f *.elc *.eln tests/*.elc tests/*.eln

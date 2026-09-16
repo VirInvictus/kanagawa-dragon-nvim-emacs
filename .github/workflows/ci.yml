@@ -3,8 +3,12 @@ name: CI
 on:
   push:
     branches: [main]
+    tags: ['v*']
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -16,20 +20,18 @@ jobs:
         emacs_version:
           - '29.1'   # minimum supported (Package-Requires floor)
           - '29.4'   # latest stable 29.x
+          - '30.2'   # current stable; what this theme actually runs in daily
         include:
-          - emacs_version: snapshot
-            experimental: true
-
-    continue-on-error: ${{ matrix.experimental == true }}
+          - emacs_version: snapshot  # the Emacs 31 canary: a red leg is signal
 
     name: Emacs ${{ matrix.emacs_version }}
 
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install Emacs
-        uses: purcell/setup-emacs@master
+        uses: purcell/setup-emacs@bdc64dc730ae1fcba200bfd52cb1b4cf6159cbe5 # v8.0
         with:
           version: ${{ matrix.emacs_version }}
 
@@ -40,18 +42,10 @@ jobs:
         run: make compile
 
       - name: Load theme without error
-        run: |
-          emacs -Q --batch -L . \
-            --eval "(add-to-list 'custom-theme-load-path default-directory)" \
-            --eval "(load-theme 'kanagawa-dragon-nvim t)" \
-            --eval "(message \"theme loaded OK\")"
+        run: make load
 
       - name: Load Wave theme without error
-        run: |
-          emacs -Q --batch -L . \
-            --eval "(add-to-list 'custom-theme-load-path default-directory)" \
-            --eval "(load-theme 'kanagawa-wave-nvim t)" \
-            --eval "(message \"wave theme loaded OK\")"
+        run: make load-wave
 
       - name: ERT test suite
         run: make test
