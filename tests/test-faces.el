@@ -561,6 +561,22 @@ in a ported theme file would silently shadow its earlier entry."
                          (kdn-test--theme-face-entries theme))))
       (should (equal faces (seq-uniq faces))))))
 
+(ert-deftest kdn-faces/dragon-and-wave-face-sets-identical ()
+  "The family's core contract (spec Conformance rule 2): Wave sets the
+identical face set Dragon sets, resolved through the Wave role values.
+The 2026-09-13 audit verified the sets identical by hand but found
+nothing enforcing it; a face added to one port and missed by the other
+now fails here by name.  Generalizes to Lotus for free when it lands."
+  (kdn-test--load-theme)
+  (kdn-test--load-wave-theme)
+  (let ((dragon-faces (mapcar (lambda (e) (nth 1 e))
+                              (kdn-test--theme-face-entries 'kanagawa-dragon-nvim)))
+        (wave-faces (mapcar (lambda (e) (nth 1 e))
+                            (kdn-test--theme-face-entries 'kanagawa-wave-nvim))))
+    (should (= (length dragon-faces) (length wave-faces)))
+    (should (equal (sort (copy-sequence dragon-faces) #'string<)
+                   (sort (copy-sequence wave-faces) #'string<)))))
+
 (ert-deftest kdn-faces/every-hex-is-a-palette-member ()
   "Every hex literal in every face spec of both themes must be a
 palette entry (case-insensitive).  Catches a typo'd or hand-rolled

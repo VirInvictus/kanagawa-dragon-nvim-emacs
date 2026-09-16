@@ -151,5 +151,25 @@ for unknown names."
                          (string-trim (buffer-string)))))
     (should (string= file-version kanagawa-dragon-nvim-version))))
 
+(defun kdn-test--file-header-version (file)
+  "Return the `;; Version:' header value of FILE at the repo root."
+  (with-temp-buffer
+    (insert-file-contents (expand-file-name file kdn-test-palette--root))
+    (goto-char (point-min))
+    (re-search-forward "^;; Version: \\(.*\\)$")
+    (string-trim (match-string 1))))
+
+(ert-deftest kdn-palette/version-headers-match ()
+  "All three .el file headers carry the same version as the
+`kanagawa-dragon-nvim-version' defconst (which the previous test pins
+to the VERSION file): five places, one number.  The sync set claimed
+test enforcement, but the headers were asserted nowhere; that is the
+gap the 2026-09-13 audit noted."
+  (dolist (file '("kanagawa-dragon-nvim.el"
+                  "kanagawa-dragon-nvim-theme.el"
+                  "kanagawa-wave-nvim-theme.el"))
+    (should (string= (kdn-test--file-header-version file)
+                     kanagawa-dragon-nvim-version))))
+
 (provide 'test-palette)
 ;;; test-palette.el ends here
