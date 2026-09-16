@@ -1,0 +1,64 @@
+# project.done
+
+Completed: 2026-09-15 (THE FINAL BLITZ), by the repo agent.
+
+## What shipped (v0.2.1, release commit 15cdc41, tag v0.2.1, GitHub Release Latest)
+
+- The snapshot CI canary restored after being permanently red and
+  invisible since 2026-08-09: defgroup + :group on the no-op LSP face,
+  when-let*, continue-on-error dropped, setup-emacs SHA-pinned at
+  v8.0, checkout SHA-pinned at v7.0.1, read-only permissions block,
+  v* tag triggers (verified live: the tag push ran CI), a new Emacs
+  30.2 job, and make load / make load-wave replacing CI's inline
+  evals. All four legs green on the release commit.
+- Eight vterm-color-bright-* faces per theme (bright SGR no longer
+  unthemed; upstream term[9..16]).
+- The family's core contract enforced at last:
+  kdn-faces/dragon-and-wave-face-sets-identical (560 = 560 after the
+  integration pass; generalizes to Lotus unchanged).
+- Theme palette lookups routed through the erroring
+  kanagawa-dragon-nvim-color: a typo now fails loudly at load.
+- Version-header sync test: five places, one number, enforced.
+- Comment-truth batch: shared-palette membership (fujiWhite, fujiGray,
+  waveAqua1 are Wave-only), flycheck-posframe comment, and the
+  modifier-bleed rationale corrected in helper docstring, README, and
+  CLAUDE.md.
+- Dragon's solaire-default-face changed to dragonBlack1 (upstream
+  bg_dim), Brandon's gated call (2026-09-15): Dragon and Wave now
+  darken real buffers alike; live in his Doom after SPC h r r.
+- Integration face pass: 69 rows per theme (avy, consult, embark,
+  transient, ediff, smerge), spec section first, identical face set in
+  both variants.
+- tests/sample.rs (compiles and runs; verified with rustc).
+- MELPA prep without the flip: package-lint clean except one
+  documented alias exception, recipe drafted in the README, repo
+  description/topics cover Wave, family-neutral alias
+  kanagawa-nvim-neutralize-lsp-modifier-bleed added (prefixed name
+  stays canonical).
+- Audit hygiene: LICENSE widened to Dragon and Wave; spec machine path
+  genericized; README em-dashes recast; the four dead lsp-face-semhl
+  rows annotated as harmless pins; .claude relic deleted and
+  gitignored; both unused v0.1.0-era PNGs removed (83% of tracked
+  bytes); make clean covers *.eln.
+- Suite: 42 to 47 tests, all green; byte-compile clean under
+  warnings-as-errors on 29.1, 29.4, 30.2, and snapshot.
+
+## Reopen conditions (recorded gated future work)
+
+- **MELPA flip**: prep is done; the flip (repo public + submission)
+  waits for Brandon. If a reviewer insists, the
+  kanagawa-nvim-neutralize-lsp-modifier-bleed alias is the documented
+  thing to drop.
+- **Lotus** (light variant): deferred by Brandon (2026-09-15) with the
+  Wave recipe proven; the equality test generalizes to it for free.
+- **Light/dark detection**: stays a v0.3 roadmap box until Lotus gives
+  "light" a real answer (both shipped variants are dark).
+- **Tabs look-parity** against nvim's bufferline.nvim: needs Brandon's
+  eyes-time (roadmap v0.2 box, still open).
+- **Wave acceptance screenshot**: needs Brandon's screen (eyes-time;
+  the old Dragon-only screenshots were removed this blitz).
+- **Shared-emitter refactor** of the duplicated 483-row face tables:
+  DECLINED this blitz by Brandon; the equality test keeps the safe
+  version of it cheap whenever he reconsiders.
+- Optional, out-of-spec: lsp-face-semhl decorator/event/label mappings
+  (defface'd by lsp-mode, unmapped by both themes).
