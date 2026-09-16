@@ -768,8 +768,7 @@
    `(flycheck-posframe-background-face ((t (:background ,bg-float))))
    `(flycheck-posframe-error-face      ((t (:background ,bg-float :foreground ,d-error))))
    `(flycheck-posframe-warning-face    ((t (:background ,bg-float :foreground ,d-warn))))
-   `(flycheck-posframe-info-face       ((t (:background ,bg-float :foreground ,d-info))))
-   ))
+   `(flycheck-posframe-info-face       ((t (:background ,bg-float :foreground ,d-info))))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)

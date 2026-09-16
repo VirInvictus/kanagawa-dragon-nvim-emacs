@@ -104,7 +104,9 @@ lsp-mode's mappings for them carry no colour (deprecated deliberately
 keeps a strike-through). The six above map to token-type faces that
 must keep their theme colours for their primary roles, so the variable
 itself is what gets repointed. The full list of touched modifiers
-lives in `kanagawa-dragon-nvim-lsp-bleeding-modifiers`.
+lives in `kanagawa-dragon-nvim-lsp-bleeding-modifiers`. A
+family-neutral alias, `kanagawa-nvim-neutralize-lsp-modifier-bleed`,
+names the same function for Wave-only configs.
 
 ## Acceptance check
 
@@ -123,6 +125,22 @@ make compile    # byte-compile with -Werror
 ```
 
 Tests run under `emacs -Q --batch`, so they don't touch your config.
+
+## MELPA (pending)
+
+The theme is MELPA-shaped but not yet submitted; the repo stays
+private until that flip is decided. Preparation done as of v0.2.1:
+`package-lint` is clean except one deliberate exception (the
+family-neutral `kanagawa-nvim-neutralize-lsp-modifier-bleed` alias,
+which MELPA's package-prefix rule would drop at submission time), and
+the recipe is drafted:
+
+```elisp
+(kanagawa-dragon-nvim
+ :repo "VirInvictus/kanagawa-dragon-nvim-emacs"
+ :fetcher github
+ :files ("*.el"))
+```
 
 ## Layout
 
