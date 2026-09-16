@@ -4,7 +4,7 @@ This file provides guidance for working on this repository.
 
 ## What this is
 
-Faithful Emacs ports of the **Dragon** and **Wave** variants of `kanagawa.nvim` (rebelot). Vanilla `deftheme`, no `doom-themes` macro dependency. Emacs 29.1+ only. MIT-licensed. Currently v0.2.0: Dragon and Wave shipped, Lotus deferred to v0.3; not yet published to MELPA.
+Faithful Emacs ports of the **Dragon** and **Wave** variants of `kanagawa.nvim` (rebelot). Vanilla `deftheme`, no `doom-themes` macro dependency. Emacs 29.1+ only. MIT-licensed. Currently v0.2.1: Dragon and Wave shipped (560 faces each, identical sets, equality test-enforced), Lotus deferred; not yet published to MELPA (prep done, flip gated).
 
 The motivating problem: the existing `kanagawa-themes` Emacs package has the palette right but does not map the **Emacs 29+ tree-sitter `font-lock-*` faces** (`font-lock-function-call-face`, `font-lock-operator-face`, `font-lock-property-use-face`, bracket/delimiter/punctuation, etc.). At `treesit-font-lock-level 4` modern code modes collapse to default foreground. This theme maps every face in the spec so a Java buffer in Doom Emacs looks the way it does in nvim.
 
@@ -13,7 +13,9 @@ The motivating problem: the existing `kanagawa-themes` Emacs package has the pal
 ```sh
 make test       # ERT under emacs -Q --batch: palette + face mapping
 make compile    # byte-compile with byte-compile-error-on-warn=t
-make clean      # rm *.elc tests/*.elc
+make load       # load the Dragon theme in batch (CI step)
+make load-wave  # load the Wave theme in batch (CI step)
+make clean      # rm *.elc *.eln (and tests/)
 ```
 
 The `EMACS` make variable overrides the binary (`make EMACS=/path/to/emacs test`). Tests run under `emacs -Q --batch`, so a passing run on a contributor's machine means the same on yours; no user config is touched.
@@ -45,7 +47,7 @@ Single `(let* ...)` that pulls palette entries into short locals (`bg`, `fg`, `s
 
 ### `kanagawa-wave-nvim-theme.el` — the Wave deftheme, same face set
 
-Structurally a mirror of the Dragon theme: the identical face-set body under the `kanagawa-wave-nvim` theme name, with the `let*` binding table resolved through the Wave role values. `spec.md`'s "Wave role mapping" section is the contract for every difference. Both theme files must keep the same face set; the structural tests in `tests/test-faces.el` enforce uniqueness and palette membership for both. Wave's ANSI row follows `themes.lua`'s `term[1..18]` (upstream's alacritty wave extra differs from it on normal black only; the spec records this).
+Structurally a mirror of the Dragon theme: the identical face-set body under the `kanagawa-wave-nvim` theme name, with the `let*` binding table resolved through the Wave role values. `spec.md`'s "Wave role mapping" section is the contract for every difference. Both theme files must keep the same face set; the structural tests in `tests/test-faces.el` enforce uniqueness, palette membership, and cross-theme equality (Dragon's face set == Wave's, the family's core contract). Wave's ANSI row follows `themes.lua`'s `term[1..18]` (upstream's alacritty wave extra differs from it on normal black only; the spec records this).
 
 ### `spec.md` is the contract
 
@@ -53,9 +55,9 @@ Three palette tables (Dragon-specific, Wave-specific, shared) with hex values th
 
 ### Tests
 
-- `tests/test-palette.el` — byte-for-byte palette match against in-test copies of upstream's `colors.lua` (dragon, wave, and shared tables), no stray entries, lookup helper behaviour, `VERSION` ↔ constant sync.
-- `tests/test-faces.el` — spot-checks the load-bearing faces (the Java treesit ones that motivated the project) plus regression coverage for the LSP semhl variable/modifier fixes, for BOTH themes (wave expectations mirror the Dragon set with Wave values). Also carries two structural invariants over both themes: every hex in every face spec is a palette member, and no face is specified twice per theme. Reads from each theme's `theme-settings` property rather than calling `face-attribute`, because in `emacs -Q --batch` many external faces (`solaire-*`, `doom-modeline-*`, `org-*`, `ansi-color-*`) aren't defined yet; the test verifies the *theme* sets the right spec, not whether the face has been realized. The spec-attr helper takes the theme name as its first argument.
-- `tests/sample.{java,py,el}` — visual eyeball buffers. The acceptance check is `sample.java` opened in Doom with `treesit-font-lock-level 4`, compared against the same file in nvim with `:colorscheme kanagawa-dragon`. Same hue, same role for keywords / types / strings / function calls / operators / parameters.
+- `tests/test-palette.el` — byte-for-byte palette match against in-test copies of upstream's `colors.lua` (dragon, wave, and shared tables), no stray entries, lookup helper behaviour, `VERSION` ↔ constant sync, plus the three `.el` file headers pinned to the same number (five places, one number).
+- `tests/test-faces.el` — spot-checks the load-bearing faces (the Java treesit ones that motivated the project) plus regression coverage for the LSP semhl variable/modifier fixes, for BOTH themes (wave expectations mirror the Dragon set with Wave values). Also carries three structural invariants over both themes: every hex in every face spec is a palette member, no face is specified twice per theme, and Dragon's face set is identical to Wave's. Reads from each theme's `theme-settings` property rather than calling `face-attribute`, because in `emacs -Q --batch` many external faces (`solaire-*`, `doom-modeline-*`, `org-*`, `ansi-color-*`) aren't defined yet; the test verifies the *theme* sets the right spec, not whether the face has been realized. The spec-attr helper takes the theme name as its first argument.
+- `tests/sample.{java,py,el,rs}` — visual eyeball buffers (the Rust one compiles and runs). The acceptance check is `sample.java` opened in Doom with `treesit-font-lock-level 4`, compared against the same file in nvim with `:colorscheme kanagawa-dragon`. Same hue, same role for keywords / types / strings / function calls / operators / parameters.
 
 ## LSP modifier bleed (load-bearing context)
 

@@ -1,5 +1,82 @@
 # patchnotes.md
 
+## v0.2.1 (2026-09-15)
+
+Maintenance release from THE FINAL BLITZ: the masked CI canary is
+restored, vterm's bright colors are themed, the family's core contract
+is finally enforced, and the integration surfaces rendered daily no
+longer fall through to default Emacs colors. The suite grows from 42
+to 47 tests.
+
+- CI: the snapshot leg had been permanently red since at least
+  2026-08-09 with `continue-on-error` masking it at run level, so the
+  Emacs 31 canary gave zero signal. Two real breakages fixed: the
+  package now has a `defgroup` and the no-op LSP face names it (a
+  defface missing its containing group is a hard error on Emacs 31),
+  and `when-let` (obsolete as of 31.1) became `when-let*`.
+  `continue-on-error` is dropped entirely. The same workflow touch
+  SHA-pinned `purcell/setup-emacs` at v8.0 and `actions/checkout` at
+  v7.0.1, added a read-only permissions block, `v*` tag triggers, the
+  missing Emacs 30 job (30.2), and `make load` / `make load-wave`
+  replacing CI's inline evals; `make clean` also removes `*.eln`.
+  First run on the fixed workflow: snapshot green.
+- Both themes map the eight `vterm-color-bright-*` faces from the
+  existing bright ANSI bindings (upstream `term[9..16]`), so bright
+  SGR (90-97 / 100-107) no longer renders unthemed.
+- New test `kdn-faces/dragon-and-wave-face-sets-identical` enforces
+  the family's core contract (spec Conformance rule 2): Wave sets the
+  identical face set Dragon sets. Hand-verified at the 2026-09-13
+  audit but enforced by nothing until now; it generalizes to Lotus
+  unchanged.
+- Theme palette lookups now route through the erroring
+  `kanagawa-dragon-nvim-color`, so a typo'd palette symbol fails
+  loudly at load time instead of silently rendering unspecified.
+- New test `kdn-palette/version-headers-match` pins the three `.el`
+  file headers to the `kanagawa-dragon-nvim-version` defconst, which
+  an existing test pins to the `VERSION` file: five places, one
+  number, actually enforced.
+- Comment truth: the shared-palette wording no longer overclaims
+  (fujiWhite, fujiGray, and waveAqua1 are Wave-only), the
+  flycheck-posframe comment describes the posframe popup it actually
+  colors, and the modifier-bleed rationale is corrected everywhere it
+  was wrong (helper docstring, README, CLAUDE.md): four of the five
+  non-bleeding modifiers do inherit colored lsp-mode faces; they
+  don't bleed because the themes pin those faces to
+  `inherit unspecified`, deprecated keeping a deliberate
+  strike-through.
+- Dragon's `solaire-default-face` background is now `dragonBlack1`
+  (#12120f, upstream's bg_dim) instead of `dragonBlack2`, which had
+  been lighter than the default bg: Brandon's call (2026-09-15), so
+  Dragon and Wave now darken real buffers alike. The spec row and the
+  test (renamed to `kdn-faces/solaire-bg-distinct-from-default`) tell
+  the true story.
+- Integration face pass: 69 rows per theme for avy, consult, embark,
+  transient, ediff, and smerge, spec section first, identical face
+  set in both variants (the equality test now guards 560 = 560), with
+  spot-checks per variant. Faces that inherit themed parents
+  (`transient-argument`/`-value` via `font-lock-string-face`, the
+  inactive/inapt family via `shadow`, the `transient-key-*` flavours
+  via `transient-key`) are deliberately unmapped.
+- New `tests/sample.rs` joins the visual eyeball buffers, so the
+  acceptance check works in `rust-ts-mode` too; it compiles and runs
+  (verified with rustc).
+- MELPA preparation without the flip: `package-lint` is clean except
+  one documented exception (the new family-neutral alias
+  `kanagawa-nvim-neutralize-lsp-modifier-bleed`, kept so Wave-only
+  configs need not call a Dragon-named function; the prefixed name
+  stays canonical and MELPA's prefix rule would drop the alias at
+  submission time). The recipe is drafted in the README, and the
+  GitHub description and topics now cover both variants.
+- Audit hygiene: the LICENSE appendix credits Dragon and Wave; spec
+  cites upstream by repo path instead of a machine path; three
+  pre-rule em-dashes are gone from the README; the four
+  `lsp-face-semhl` rows no current lsp-mode defface defines
+  (`typeparameter`, `enummember`, `declaration`, `readonly`) are
+  annotated as harmless pins; the `.claude/` relic is deleted and
+  gitignored; and the two unused v0.1.0-era screenshots (83% of
+  tracked bytes) are removed from `assets/` (Brandon's call; git
+  history keeps the blobs).
+
 ## v0.2.0 (2026-09-13)
 
 The Wave variant ships: a second full port of upstream kanagawa.nvim's

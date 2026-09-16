@@ -152,13 +152,14 @@ spec.md                         Authoritative palette + face contract
 roadmap.md                      Phased build, ticked when shipped
 patchnotes.md                   Release notes (newest at top)
 VERSION                         Single source of truth for the version
-Makefile                        make test / make compile / make clean
-.github/workflows/ci.yml        CI: byte-compile + theme load + tests
+Makefile                        make test / compile / load / load-wave / clean
+.github/workflows/ci.yml        CI: byte-compile + theme load + tests,
+                                Emacs 29.1 / 29.4 / 30.2 / snapshot
 CLAUDE.md                       Guidance for coding agents (AGENTS.md symlinks to it)
 tests/
   test-palette.el               Palette ↔ upstream byte-for-byte
-  test-faces.el                 Critical face attributes resolve correctly
-  sample.{java,py,el}           Visual eyeball buffers
+  test-faces.el                 Face attributes + structural invariants
+  sample.{java,py,el,rs}        Visual eyeball buffers
 ```
 
 ## What's NOT in v0.2
