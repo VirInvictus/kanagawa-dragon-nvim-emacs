@@ -178,11 +178,12 @@ markers, and the modifier's colour wins the face composition."
 
 (ert-deftest kdn-faces/solaire-bg-distinct-from-default ()
   "Solaire's bg sits one step off the default, which is what makes
-Doom buffers feel right: Dragon lightens real buffers (dragonBlack2
-over dragonBlack3), Wave darkens them (sumiInk2 over sumiInk3). Guard
-against accidentally using `bg' itself, in either direction."
+Doom buffers feel right: since the 2026-09-15 decision both variants
+darken real buffers, Dragon to bg_dim (dragonBlack1) and Wave one
+step (sumiInk2 over sumiInk3). Guard against accidentally using `bg'
+itself."
   (kdn-test--load-theme)
-  (kdn-test--should-bg 'solaire-default-face 'dragonBlack2)
+  (kdn-test--should-bg 'solaire-default-face 'dragonBlack1)
   (kdn-test--should-bg 'default              'dragonBlack3))
 
 (ert-deftest kdn-faces/ansi-dragon-mapping ()

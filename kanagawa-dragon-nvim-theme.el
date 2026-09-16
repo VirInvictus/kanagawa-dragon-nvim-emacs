@@ -266,7 +266,7 @@
    ;; ----------------------------------------------------------------
    ;; Phase 5 — Doom-specific UI (no-op in vanilla Emacs)
    ;; ----------------------------------------------------------------
-   `(solaire-default-face       ((t (:background ,bg-m1 :foreground ,fg))))
+   `(solaire-default-face       ((t (:background ,bg-dim :foreground ,fg))))
    `(solaire-fringe-face        ((t (:background ,bg-m1))))
    `(solaire-line-number-face   ((t (:background ,bg-m1 :foreground ,bg-p2))))
    `(solaire-hl-line-face       ((t (:background ,bg-gutter :extend t))))

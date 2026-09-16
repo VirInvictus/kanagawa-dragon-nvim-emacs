@@ -201,7 +201,7 @@ Includes the Emacs 29+ tree-sitter additions (`*-call-face`,
 | `doom-modeline-evil-insert-state` | `dragonGreen2`                        |
 | `doom-modeline-evil-visual-state` | `dragonOrange`                        |
 | `doom-modeline-evil-replace-state` | `dragonRed`                          |
-| `solaire-default-face`          | bg `dragonBlack2` (one step off the default; lightens real buffers, where Wave's same binding darkens them) |
+| `solaire-default-face`          | bg `dragonBlack1` (upstream `bg_dim`; slightly darker, so Dragon and Wave darken real buffers alike) |
 | `solaire-hl-line-face`          | bg `dragonBlack4`                       |
 | `solaire-mode-line-face`        | bg `dragonBlack0`                       |
 
