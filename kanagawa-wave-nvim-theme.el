@@ -527,8 +527,11 @@
    `(lsp-face-semhl-parameter           ((t (:foreground ,s-param))))
    `(lsp-face-semhl-variable            ((t (:foreground ,s-ident))))
 
-   ;; LSP Modifiers (must be explicitly unspecified so they don't override base token colors
-   ;; by inheriting from standard font-lock faces)
+   ;; LSP modifiers: these faces are pinned to `inherit unspecified' so
+   ;; lsp-mode's overlay cannot recolor base tokens through them (the
+   ;; face-level counterpart of the variable-level
+   ;; `kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed').  deprecated
+   ;; is the deliberate exception: it keeps a strike-through.
    `(lsp-face-semhl-definition          ((t (:inherit unspecified))))
    `(lsp-face-semhl-declaration         ((t (:inherit unspecified))))
    `(lsp-face-semhl-implementation      ((t (:inherit unspecified))))
@@ -661,7 +664,9 @@
    `(vterm-color-bright-cyan    ((t (:foreground ,ansi-bright-cyan :background ,ansi-bright-cyan))))
    `(vterm-color-bright-white   ((t (:foreground ,ansi-bright-white :background ,ansi-bright-white))))
 
-   ;; Customize the diagnostics number-on-modeline strip used by Doom
+   ;; flycheck-posframe: the diagnostics popup flycheck-posframe draws
+   ;; in a child frame at point (the modeline's diagnostics strip is
+   ;; the doom-modeline faces above)
    `(flycheck-posframe-background-face ((t (:background ,bg-float))))
    `(flycheck-posframe-error-face      ((t (:background ,bg-float :foreground ,d-error))))
    `(flycheck-posframe-warning-face    ((t (:background ,bg-float :foreground ,d-warn))))

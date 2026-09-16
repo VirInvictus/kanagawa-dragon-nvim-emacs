@@ -81,7 +81,9 @@
     (surimiOrange  . "#FFA066")
     (peachRed      . "#FF5D62")
     (boatYellow2   . "#C0A36E")
-    ;; Shared entries used by both themes' mappings
+    ;; Upstream's shared pool: entries outside the two variant-specific
+    ;; tables.  Each serves at least one theme's mapping, but three are
+    ;; Wave-only (fujiWhite, fujiGray, waveAqua1); the rest serve both.
     (dragonBlue    . "#658594")
     (fujiWhite     . "#DCD7BA")
     (oldWhite      . "#C8C093")
@@ -156,9 +158,13 @@ longer overrides the base token colour."
 overrides the base token colour via face composition.
 
 The five other standard modifiers (`definition', `implementation',
-`defaultLibrary', `static', `deprecated') already map to dedicated
-modifier faces with no inherent colour, so they don't bleed and are
-left alone.")
+`defaultLibrary', `static', `deprecated') need no such rebind: the
+themes pin their dedicated modifier faces (`lsp-face-semhl-definition'
+and friends) to inherit unspecified, so lsp-mode's mappings for them
+carry no colour (deprecated deliberately keeps a strike-through).
+These six map to token-type faces that must keep their theme colours
+for their primary roles, so the variable itself is what gets
+repointed.")
 
 (defun kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed ()
   "Stop lsp-mode's modifier→type-face mapping from overwriting base colours.

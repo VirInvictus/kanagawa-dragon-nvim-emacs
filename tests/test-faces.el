@@ -1,10 +1,12 @@
-;;; test-faces.el --- Representative face attribute checks -*- lexical-binding: t; -*-
+;;; test-faces.el --- Face attribute checks for both themes -*- lexical-binding: t; -*-
 
-;; Loads the theme into a batch Emacs and asserts that the face spec
-;; recorded under the theme has the expected fg/bg from the spec.  This
-;; doesn't enumerate every face — it spot-checks the ones whose mismatch
-;; was the visible bug that motivated the project (Java treesit faces),
-;; plus the load-bearing UI surfaces.
+;; Loads the themes into a batch Emacs and asserts that the face specs
+;; recorded under each theme carry the expected attributes from the
+;; spec: spot-checks for the load-bearing faces (the Java treesit set
+;; whose collapse motivated the project), a Wave set mirroring the
+;; load-bearing Dragon checks, and structural invariants over both
+;; themes (no face specified twice, every hex a palette member, and
+;; Dragon's face set identical to Wave's).
 ;;
 ;; Implementation note: we read from `theme-settings' directly rather
 ;; than calling `face-attribute', because in `emacs -Q --batch' many

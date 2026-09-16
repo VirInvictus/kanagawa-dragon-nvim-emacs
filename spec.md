@@ -79,7 +79,11 @@ referencing is mechanical. Hex values are bit-for-bit identical.
 | `peachRed`      | `#FF5D62` | special-3                          |
 | `boatYellow2`   | `#C0A36E` | **operators**, regex               |
 
-### Shared palette (used by both variants)
+### Shared palette (upstream's common pool)
+
+Entries outside upstream's two variant-specific tables.  Each appears
+in at least one theme's mapping, but three are Wave-only:
+`fujiWhite`, `fujiGray`, and `waveAqua1`.
 
 | Name           | Hex       | Role                                  |
 |----------------|-----------|---------------------------------------|

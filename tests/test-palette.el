@@ -1,8 +1,9 @@
 ;;; test-palette.el --- Palette integrity tests -*- lexical-binding: t; -*-
 
-;; Verifies the Dragon palette in `kanagawa-dragon-nvim.el' matches the
-;; upstream nvim source (kanagawa.nvim/lua/kanagawa/colors.lua) byte-for-
-;; byte.  Run with:
+;; Verifies the palette in `kanagawa-dragon-nvim.el' matches the upstream
+;; nvim source (kanagawa.nvim/lua/kanagawa/colors.lua) byte-for-byte:
+;; the Dragon table, the Wave table, the shared pool, the union (no
+;; stray entries), the lookup helper, and the version sync.  Run with:
 ;;
 ;;   make test
 ;;
@@ -95,7 +96,9 @@ lockstep with the palette.")
     (autumnRed     . "#C34043")
     (autumnGreen   . "#76946A")
     (autumnYellow  . "#DCA561"))
-  "Shared (Wave-origin) palette entries used by Dragon's mapping.")
+  "Upstream's shared (cross-variant) pool: every entry outside the two
+variant-specific tables.  fujiWhite, fujiGray, and waveAqua1 serve
+Wave's mapping only; the rest serve both themes.")
 
 (ert-deftest kdn-palette/every-dragon-entry-matches-upstream ()
   "Every upstream Dragon hex is reproduced byte-for-byte."

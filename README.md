@@ -97,9 +97,13 @@ colour. Add this once to your config:
 ```
 
 That's it. The five non-bleeding modifiers (`definition`,
-`implementation`, `defaultLibrary`, `static`, `deprecated`) are left
-alone because their default mappings target dedicated modifier-only
-faces with no inherent colour. The full list of touched modifiers
+`implementation`, `defaultLibrary`, `static`, `deprecated`) need no
+helper call: both themes pin their dedicated modifier faces
+(`lsp-face-semhl-definition` and friends) to inherit `unspecified`, so
+lsp-mode's mappings for them carry no colour (deprecated deliberately
+keeps a strike-through). The six above map to token-type faces that
+must keep their theme colours for their primary roles, so the variable
+itself is what gets repointed. The full list of touched modifiers
 lives in `kanagawa-dragon-nvim-lsp-bleeding-modifiers`.
 
 ## Acceptance check
