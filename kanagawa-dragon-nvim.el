@@ -188,6 +188,14 @@ Recommended call site:
     (when-let* ((cell (assoc mod lsp-semantic-token-modifier-faces)))
       (setcdr cell 'kanagawa-dragon-nvim-lsp-modifier-noop))))
 
+;; Family-neutral alias: the helper serves Dragon and Wave alike, but
+;; the package prefix is the Dragon name (this repo's first port), so
+;; that prefixed spelling stays the canonical one for MELPA's
+;; package-prefix conventions.  Wave-only users can call the shorter
+;; name.
+(defalias 'kanagawa-nvim-neutralize-lsp-modifier-bleed
+  'kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed)
+
 (provide 'kanagawa-dragon-nvim)
 
 ;;; kanagawa-dragon-nvim.el ends here

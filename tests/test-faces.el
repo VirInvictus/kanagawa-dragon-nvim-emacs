@@ -163,6 +163,13 @@ markers, and the modifier's colour wins the face composition."
     (should (eq (cdr (assoc "static" lsp-semantic-token-modifier-faces))
                 'lsp-face-semhl-static))))
 
+(ert-deftest kdn-helpers/neutral-alias-resolves-to-helper ()
+  "The family-neutral name is a live alias of the prefixed helper, so
+Wave-only users can call either spelling."
+  (require 'kanagawa-dragon-nvim)
+  (should (eq (symbol-function 'kanagawa-nvim-neutralize-lsp-modifier-bleed)
+              'kanagawa-dragon-nvim-neutralize-lsp-modifier-bleed)))
+
 
 (ert-deftest kdn-faces/org-headings-step-by-hue ()
   (kdn-test--load-theme)
