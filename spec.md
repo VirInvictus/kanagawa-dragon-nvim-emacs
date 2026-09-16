@@ -225,7 +225,18 @@ opinionated and not part of nvim's flavor):
 ### Terminal / ANSI
 
 Mirrors nvim's `term[1..18]` Dragon mapping verbatim
-(see palette table for which color goes where).
+(see palette table for which color goes where): `term[1..8]` are the
+normal ANSI colors, `term[9..16]` the brights, and `term[17..18]` the
+extended colors (`dragonOrange` / `dragonOrange2`, which is why
+`dragonOrange2` exists in the palette despite no face using it).
+
+The Emacs surfaces carry the mapping: `ansi-color-*` and
+`term-color-*` for the 16 palette entries, and vterm's
+`vterm-color-default`, `vterm-color-{black..white}`, and the eight
+`vterm-color-bright-*` faces resolve from the same rows (the brights
+are `term[9..16]`; bright faces shipped v0.2.1). vterm reads each
+color face's background as its palette entry, so the vterm color
+faces set foreground and background to the same hex.
 
 ### Wave role mapping
 

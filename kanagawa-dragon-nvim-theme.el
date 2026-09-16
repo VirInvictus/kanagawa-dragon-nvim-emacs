@@ -661,6 +661,14 @@
    `(vterm-color-magenta         ((t (:foreground ,ansi-magenta :background ,ansi-magenta))))
    `(vterm-color-cyan            ((t (:foreground ,ansi-cyan :background ,ansi-cyan))))
    `(vterm-color-white           ((t (:foreground ,ansi-white :background ,ansi-white))))
+   `(vterm-color-bright-black   ((t (:foreground ,ansi-bright-black :background ,ansi-bright-black))))
+   `(vterm-color-bright-red     ((t (:foreground ,ansi-bright-red :background ,ansi-bright-red))))
+   `(vterm-color-bright-green   ((t (:foreground ,ansi-bright-green :background ,ansi-bright-green))))
+   `(vterm-color-bright-yellow  ((t (:foreground ,ansi-bright-yellow :background ,ansi-bright-yellow))))
+   `(vterm-color-bright-blue    ((t (:foreground ,ansi-bright-blue :background ,ansi-bright-blue))))
+   `(vterm-color-bright-magenta ((t (:foreground ,ansi-bright-magenta :background ,ansi-bright-magenta))))
+   `(vterm-color-bright-cyan    ((t (:foreground ,ansi-bright-cyan :background ,ansi-bright-cyan))))
+   `(vterm-color-bright-white   ((t (:foreground ,ansi-bright-white :background ,ansi-bright-white))))
 
    ;; Customize the diagnostics number-on-modeline strip used by Doom
    `(flycheck-posframe-background-face ((t (:background ,bg-float))))

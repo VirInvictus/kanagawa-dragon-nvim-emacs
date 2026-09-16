@@ -371,7 +371,8 @@ re-ordering would be invisible to a spot check."
 
 (ert-deftest kdn-faces/ansi-bright-and-term ()
   "The bright ANSI row mirrors upstream's alacritty extras verbatim,
-and term/vterm reuse the same mapping."
+and term/vterm reuse the same mapping, including vterm's bright
+faces, so bright SGR (90-97/100-107) does not render unthemed."
   (kdn-test--load-theme)
   (kdn-test--should-fg 'ansi-color-bright-red     'waveRed)
   (kdn-test--should-fg 'ansi-color-bright-green   'dragonGreen)
@@ -381,7 +382,15 @@ and term/vterm reuse the same mapping."
   (kdn-test--should-fg 'ansi-color-bright-cyan    'waveAqua2)
   (kdn-test--should-fg 'term-color-red            'dragonRed)
   (kdn-test--should-fg 'term-color-cyan           'dragonAqua)
-  (kdn-test--should-fg 'vterm-color-green         'dragonGreen2))
+  (kdn-test--should-fg 'vterm-color-green         'dragonGreen2)
+  (kdn-test--should-fg 'vterm-color-bright-black   'dragonGray)
+  (kdn-test--should-fg 'vterm-color-bright-red     'waveRed)
+  (kdn-test--should-fg 'vterm-color-bright-green   'dragonGreen)
+  (kdn-test--should-fg 'vterm-color-bright-yellow  'carpYellow)
+  (kdn-test--should-fg 'vterm-color-bright-blue    'springBlue)
+  (kdn-test--should-fg 'vterm-color-bright-magenta 'springViolet1)
+  (kdn-test--should-fg 'vterm-color-bright-cyan    'waveAqua2)
+  (kdn-test--should-fg 'vterm-color-bright-white   'dragonWhite))
 
 (ert-deftest kdn-faces/core-ui-remainder ()
   (kdn-test--load-theme)
@@ -481,7 +490,15 @@ alacritty extra's #090618 black is deliberately not used (see spec)."
   (kdn-test--wave-should-fg 'ansi-color-bright-black 'fujiGray)
   (kdn-test--wave-should-fg 'ansi-color-bright-white 'fujiWhite)
   (kdn-test--wave-should-fg 'term-color-cyan   'waveAqua1)
-  (kdn-test--wave-should-fg 'vterm-color-green 'autumnGreen))
+  (kdn-test--wave-should-fg 'vterm-color-green 'autumnGreen)
+  (kdn-test--wave-should-fg 'vterm-color-bright-black   'fujiGray)
+  (kdn-test--wave-should-fg 'vterm-color-bright-red     'samuraiRed)
+  (kdn-test--wave-should-fg 'vterm-color-bright-green   'springGreen)
+  (kdn-test--wave-should-fg 'vterm-color-bright-yellow  'carpYellow)
+  (kdn-test--wave-should-fg 'vterm-color-bright-blue    'springBlue)
+  (kdn-test--wave-should-fg 'vterm-color-bright-magenta 'springViolet1)
+  (kdn-test--wave-should-fg 'vterm-color-bright-cyan    'waveAqua2)
+  (kdn-test--wave-should-fg 'vterm-color-bright-white   'fujiWhite))
 
 (ert-deftest kdn-faces/wave-core-ui-completion-solaire ()
   (kdn-test--load-wave-theme)
