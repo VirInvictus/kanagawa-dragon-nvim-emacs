@@ -27,8 +27,7 @@
 (deftheme kanagawa-wave-nvim
   "Faithful port of nvim's Kanagawa-Wave.")
 
-(let* ((p kanagawa-dragon-nvim-palette)
-       (c (lambda (name) (cdr (assq name p))))
+(let* ((c (lambda (name) (kanagawa-dragon-nvim-color name)))
        ;; UI
        (bg          (funcall c 'sumiInk3))
        (bg-dim      (funcall c 'sumiInk1))

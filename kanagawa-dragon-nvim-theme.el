@@ -35,8 +35,7 @@
 (deftheme kanagawa-dragon-nvim
   "Faithful port of nvim's Kanagawa-Dragon.")
 
-(let* ((p kanagawa-dragon-nvim-palette)
-       (c (lambda (name) (cdr (assq name p))))
+(let* ((c (lambda (name) (kanagawa-dragon-nvim-color name)))
        ;; UI
        (bg          (funcall c 'dragonBlack3))
        (bg-dim      (funcall c 'dragonBlack1))
