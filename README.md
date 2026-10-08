@@ -1,5 +1,7 @@
 # kanagawa-dragon-nvim-emacs
 
+> **Status: complete and stable.** Bug reports welcome; feature development is closed.
+
 Faithful Emacs ports of the **Dragon** and **Wave** variants of
 [`kanagawa.nvim`][upstream] by [rebelot][upstream]. Built so that a Java
 buffer in Doom Emacs and the same buffer in nvim look like the same
